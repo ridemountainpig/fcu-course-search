@@ -4,11 +4,11 @@ s = requests.Session()
 
 # system year
 year = '111'
-system = '1'
+semester = '1'
 
 
 def getGeneralCourseList():
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + system + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
+    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
     print(data)
     header = {
         "Content-Type":
@@ -29,7 +29,7 @@ def getGeneralCourseList():
 
 
 def getCourseByCode(courseCode):
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + system + '},"typeOptions":{"code":{"enabled":true,"value":"' + str(courseCode) + '"},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":false,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
+    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":true,"value":"' + str(courseCode) + '"},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":false,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
 
     header = {
         "Content-Type":
@@ -50,21 +50,29 @@ def getCourseByCode(courseCode):
 def courseListToDict(courseList):
     result = {}
     count = 0
+    courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
     for i in range(1, len(courseList)):
         courseData = courseList[i].split(r'\",\"')
         courseNumber = courseData[0]
         courseName = courseData[2].split(r'\":\"')[1]
+        courseClass = courseData[7].split(r'\":\"')[1]
         courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
         courseSum = courseData[9].split(r'\":')[1].split(r',')[0]
         courseBlance = courseData[9].split(r'\":')[2].split(r',')[0]
+        courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
+        courseUrlSub = courseData[11].split(r'\":\"')[1].split(r'\"')[0]
+        courseUrlSrc = courseData[12].split(r'\":\"')[1].split(r'\"')[0]
+        courseIntroduceUrl = f"{courseUrlTitle + year + semester + courseUrlCls + courseUrlSub + courseUrlSrc}"
 
         if courseBlance < courseSum:
             result[count] = {
                 "courseNumber": courseNumber,
                 "courseName": courseName,
+                "courseClass": courseClass,
                 "courseDate": courseDate,
                 "courseBalance": courseBlance,
-                "courseSum": courseSum
+                "courseSum": courseSum,
+                "courseIntroduceUrl": courseIntroduceUrl
             }
             count += 1
     return result
