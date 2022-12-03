@@ -9,7 +9,7 @@ semester = '1'
 
 def getGeneralCourseList():
     data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-    print(data)
+    
     header = {
         "Content-Type":
         "application/json",
