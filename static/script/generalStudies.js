@@ -1,7 +1,14 @@
 function getGeneralStudies(courseData) {
-    console.log(Object.keys(courseData).length);
     
-    console.log(courseData);
+    if (Object.keys(courseData).length === 0) {
+        let courseHtml = `
+            <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600" style="margin-top: 10%;">通識課程皆已額滿</div>
+            <i class="bi bi-emoji-frown flex justify-center text-gray-600" style="margin-top: 20%; font-size: 80px;"></i>
+        `
+        $('#courseList').html(courseHtml);
+        return;
+    }
+    
     for(let i = 0; i < Object.keys(courseData).length; i++) {
         let courseHtml = `
             <div class="min-[930px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
