@@ -8,6 +8,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/getCourse/<course>')
+def getCourse(course):
+    return cs.getCourseByCode(course)
+
+@app.route('/followCourse')
+def followCourse():
+    return render_template('followCourse.html')
+
 @app.route('/generalstudies')
 def generalstudies():
     return render_template('generalStudies.html', courseData=cs.getGeneralCourseList())
