@@ -12,7 +12,7 @@ def index():
 def getCourse(course):
     return cs.getCourseByCode(course)
 
-@app.route('/followCourse')
+@app.route('/followcourse')
 def followCourse():
     return render_template('followCourse.html')
 
