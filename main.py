@@ -20,5 +20,8 @@ def followCourse():
 def generalstudies():
     return render_template('generalStudies.html', courseData=cs.getGeneralCourseList())
 
+@app.route('/checkcourse/<course>')
+def checkCourse(course):
+    return cs.checkCourse(course)
 
 app.run(host='0.0.0.0', port=81)
