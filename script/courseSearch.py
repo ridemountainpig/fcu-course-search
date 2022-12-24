@@ -79,8 +79,8 @@ def byCodeCourseListToDict(courseList):
         courseName = courseData[2].split(r'\":\"')[1]
         courseClass = courseData[7].split(r'\":\"')[1]
         courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
-        courseSum = courseData[9].split(r'\":')[1].split(r',')[0]
-        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0]
+        courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
+        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
 
         result[count] = {
             "courseNumber": courseNumber,
@@ -104,8 +104,8 @@ def courseListToDict(courseList):
         courseName = courseData[2].split(r'\":\"')[1]
         courseClass = courseData[7].split(r'\":\"')[1]
         courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
-        courseSum = courseData[9].split(r'\":')[1].split(r',')[0]
-        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0]
+        courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
+        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
         courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
         courseUrlSub = courseData[11].split(r'\":\"')[1].split(r'\"')[0]
         courseUrlSrc = courseData[12].split(r'\":\"')[1].split(r'\"')[0]
