@@ -4,7 +4,7 @@ s = requests.Session()
 
 # system year
 year = '111'
-semester = '1'
+semester = '2'
 
 def checkCourse(courseCode):
     data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":true,"value":"' + \
