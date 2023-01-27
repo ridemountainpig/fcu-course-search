@@ -1,6 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from script import courseSearch as cs
-
 app = Flask(__name__)
 
 
@@ -23,5 +22,9 @@ def generalstudies():
 @app.route('/checkcourse/<course>')
 def checkCourse(course):
     return cs.checkCourse(course)
+
+@app.route('/getGeneralStudiesList')
+def getGeneralStudiesList():
+    return jsonify(cs.getGeneralCourseList())
 
 app.run(host='0.0.0.0', port=81)
