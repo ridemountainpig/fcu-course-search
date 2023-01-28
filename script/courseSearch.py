@@ -172,5 +172,4 @@ def appCourseListToDict(courseList):
             }
             result.append(data)
             count += 1
-    print(result)
     return result
