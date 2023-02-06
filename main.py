@@ -11,6 +11,10 @@ def index():
 def getCourse(course):
     return cs.getCourseByCode(course)
 
+@app.route('/searchcourse')
+def searchCourse():
+    return render_template('searchCourse.html')
+
 @app.route('/followcourse')
 def followCourse():
     return render_template('followCourse.html')
