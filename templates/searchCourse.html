@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>FCU COURSE</title>
+    <link rel="icon" href="/static/images/FF.png" type="image/icon">
+</head>
+
+<body class="h-[calc(100vh_-_20rem) bg-slate-100">
+    <div class="flex max-[520px]:ml-8 min-[520px]:ml-24 mt-20 my-5">
+        <div class="pb-10">
+            <div class="font-bold text-4xl text-gray-600">Course Number</div>
+            <div class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
+                style="width: 122px; letter-spacing: 10px;">課程號碼</div>
+        </div>
+    </div>
+
+    <div class="flex justify-center items-center h-[calc(100vh_-_18rem)] w-full">
+        <div id="searchBox" class="rounded-2xl opacity-70 -skew-x-[25deg] duration-700 w-4/6 h-5/6 shadow-2xl"
+            style="background-color: #dfe7d5;">
+            <div class="flex items-center">
+                <div id="searchInput" class="skew-x-[25deg] w-full my-40">
+                    <div class="flex justify-center">
+                        <div class="font-medium text-lg text-gray-400 py-2">請輸入課程號碼</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <input type="number" id="courseInput"
+                            class="block w-3/6 p-4 pl-10 text-base text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 shadow-xl"
+                            placeholder="Course Number">
+                        <button
+                            class="text-gray-400 bg-orange-100 font-medium rounded-tr-lg rounded-br-lg text-lg p-4 shadow-xl"
+                            onclick="searchCourse()">查詢課程</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/script/searchCourse.js"></script>
+</body>
+
+</html>
