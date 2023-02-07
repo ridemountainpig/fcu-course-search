@@ -23,6 +23,10 @@ def followCourse():
 def generalstudies():
     return render_template('generalStudies.html', courseData=cs.getGeneralCourseList())
 
+@app.route('/searchcourse/<course>')
+def searchCourseByCode(course):
+    return cs.searchCourseByCode(course)
+
 @app.route('/checkcourse/<course>')
 def checkCourse(course):
     return cs.checkCourse(course)
