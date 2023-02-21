@@ -125,6 +125,7 @@ def byCodeCourseListToDict(courseList):
         courseName = courseData[2].split(r'\":\"')[1]
         courseClass = courseData[7].split(r'\":\"')[1]
         courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
+        courseTeacher = courseData[8].split(r'\":\"')[1].split(' ')[2]
         courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
         courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
         courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
@@ -137,6 +138,7 @@ def byCodeCourseListToDict(courseList):
             "courseName": courseName,
             "courseClass": courseClass,
             "courseDate": courseDate,
+            "courseTeacher": courseTeacher,
             "courseBalance": courseBlance,
             "courseSum": courseSum,
             "courseIntroduceUrl": courseIntroduceUrl
