@@ -1,7 +1,10 @@
 from flask import Flask, render_template, jsonify
 from script import courseSearch as cs
-app = Flask(__name__)
+import os
 
+app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['DEBUG'] = True
 
 @app.route('/')
 def index():
@@ -35,4 +38,10 @@ def checkCourse(course):
 def getGeneralStudiesList():
     return cs.getAppGeneralCourseList()
 
-app.run(host='0.0.0.0', port=81)
+@app.route('/GITPULL')
+def gitPull():
+    os.system('git pull')
+    return "Git Pull Success"
+
+if __name__ == '__main__': 
+    app.run(host='0.0.0.0', port=81)
