@@ -1,0 +1,15 @@
+name: Make Request to URL
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  make-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Make a GET request to a URL
+        run: |
+          curl https://fcu-course-search.ridemountainpig.repl.co/GITPULL
