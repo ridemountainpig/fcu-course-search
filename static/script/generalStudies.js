@@ -15,7 +15,7 @@ function getGeneralStudies(courseData) {
                 <div id="courseNumber" class="flex justify-center items-center p-5 m-3 text-gray-600 font-extrabold text-lg bg-slate-100 rounded-lg">
                     ${courseData[i].courseNumber}
                 </div>
-                <div class="flex justify-start ml-5" style="width: 200px;">
+                <div class="flex justify-start max-[930px]:ml-5" style="width: 260px;">
                     <div>
                         <div id="courseName" class="text-gray-600 font-bold text-xl">
                             ${courseData[i].courseName}
@@ -25,7 +25,7 @@ function getGeneralStudies(courseData) {
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-start min-[930px]:justify-center items-center text-orange-400 font-bold text-xl ml-5 mt-2">
+                <div class="flex justify-start min-[930px]:justify-center items-center text-orange-400 font-bold text-xl max-[930px]:ml-5 mt-2">
                     <div>${courseData[i].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[i].courseSum}</div>
                 </div>
                 <div class="flex justify-center">
