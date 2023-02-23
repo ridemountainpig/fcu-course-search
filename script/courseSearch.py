@@ -124,8 +124,12 @@ def byCodeCourseListToDict(courseList):
         courseNumber = courseData[0]
         courseName = courseData[2].split(r'\":\"')[1]
         courseClass = courseData[7].split(r'\":\"')[1]
-        courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
-        courseTeacher = courseData[8].split(r'\":\"')[1].split(' ')[2]
+        courseDate = []
+        for i in courseData[8].split(r'\":\"')[1].split(' ')[:-1]:
+            if i != '':
+                courseDate.append(i)
+        courseDate = ' '.join(courseDate)
+        courseTeacher = courseData[8].split(r'\":\"')[1].split(' ')[-1]
         courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
         courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
         courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
@@ -186,7 +190,11 @@ def appCourseListToDict(courseList):
         courseNumber = courseData[0]
         courseName = courseData[2].split(r'\":\"')[1]
         courseClass = courseData[7].split(r'\":\"')[1]
-        courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
+        courseDate = []
+        for i in courseData[8].split(r'\":\"')[1].split(' ')[:-1]:
+            if i != '':
+                courseDate.append(i)
+        courseDate = ' '.join(courseDate)
         courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
         courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
         courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
