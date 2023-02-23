@@ -1,3 +1,9 @@
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        searchCourse();
+    }
+});
+
 function searchCourse() {
     let courseNumber = $('#courseInput').val();
 
@@ -32,10 +38,10 @@ function searchCourse() {
                                         ${courseData[0].courseName}
                                     </div>
                                     <div id="courseTime" class="text-gray-400 font-medium text-sm my-2">
-                                        上課時間：${courseData[0].courseDate}
+                                        開課系所：${courseData[0].courseClass}
                                     </div>
                                     <div id="courseTime" class="text-gray-400 font-medium text-sm my-2">
-                                        上課教室：${courseData[0].courseClass}
+                                        上課時間：${courseData[0].courseDate}
                                     </div>
                                     <div id="courseTime" class="text-gray-400 font-medium text-sm my-2">
                                         教師：${courseData[0].courseTeacher}
