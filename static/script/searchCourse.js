@@ -13,6 +13,7 @@ function searchCourse() {
 
     $('#searchBox').removeClass('-skew-x-[10deg]');
     $('#searchInput').addClass('hidden');
+    $('#courseListBox').removeClass('hidden');
     $('#courseInput').val("");
 
     $.ajax({
@@ -70,7 +71,7 @@ function searchCourse() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-start mt-5">
+                            <div class="flex justify-center mt-5">
                                 <div>
                                     <div id="courseName" class="text-gray-600 font-bold text-xl">
                                         課程號碼錯誤，查無此課程
@@ -89,5 +90,6 @@ function searchCourse() {
 function resetSearchCourse() {
     $('#searchBox').addClass('-skew-x-[10deg]');
     $('#searchInput').removeClass('hidden');
+    $('#courseListBox').addClass('hidden');
     $('#courseList').empty();
 }

@@ -12,16 +12,16 @@
     <link rel="icon" href="/static/images/FF.png" type="image/icon">
 </head>
 
-<body class="h-[calc(100vh_-_20rem) bg-slate-100">
-    <div class="flex max-[520px]:ml-8 min-[520px]:ml-24 mt-20 my-5">
-        <div class="pb-10">
+<body class="h-screen bg-slate-100">
+    <div class="flex items-center max-[520px]:ml-8 min-[520px]:ml-24 h-1/4">
+        <div>
             <div class="font-bold text-4xl text-gray-600">Course Number</div>
             <div class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
                 style="width: 122px; letter-spacing: 10px;">課程號碼</div>
         </div>
     </div>
 
-    <div class="flex justify-center items-center h-[calc(100vh_-_18rem)] w-full">
+    <div class="flex justify-center items-start h-3/4 w-full">
         <div id="searchBox" class="rounded-2xl opacity-70 -skew-x-[10deg] duration-700 w-4/6 h-5/6 shadow-2xl"
             style="background-color: #dfe7d5;">
             <div id="searchInput" class="flex items-center h-5/6">
@@ -39,7 +39,9 @@
                     </div>
                 </div>
             </div>
-            <div id="courseList" class="h-full flex justify-center items-center"></div>
+            <div id="courseListBox" class="flex justify-center items-center h-full hidden">
+                <div id="courseList"></div>
+            </div>
         </div>
     </div>
     <script src="../static/script/searchCourse.js"></script>
