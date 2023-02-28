@@ -1,5 +1,5 @@
-$(document).on('keypress',function(e) {
-    if(e.which == 13) {
+$(document).on('keypress', function (e) {
+    if (e.which == 13) {
         addFollowCourse();
     }
 });
@@ -42,6 +42,8 @@ function deleteFollowCourse(courseNumber) {
 }
 
 function generateCourseList() {
+    $('#coffeeIcon').removeClass('invisible');
+    $('#coffeeBackground').removeClass('invisible');
     let followList = localStorage.getItem("followList");
     if (followList == null) {
         followList = [];
@@ -55,9 +57,10 @@ function generateCourseList() {
         } else {
             $('#followNumber').append(followList.length);
         }
-        for (let i = 0; i < followList.length; i++) {
+        for (let i = followList.length - 1; i >= 0; i--) {
             if (followList[i] == '') continue
             $.ajax({
+                async: false,
                 url: "/getCourse/" + followList[i],
                 success: function (courseData) {
                     let courseHtml = `
@@ -99,4 +102,8 @@ function generateCourseList() {
         $('#followNumber').append(0);
         $('#courseList').html(courseHtml);
     }
+    setTimeout(function () {
+        $('#coffeeIcon').addClass('invisible');
+        $('#coffeeBackground').addClass('invisible');
+    }, 2000);
 }
