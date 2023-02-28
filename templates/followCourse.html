@@ -33,10 +33,15 @@
     </div>
     <div class="flex max-[1200px]:flex-col h-3/4">
         <div class="flex min-[1200px]:flex-auto justify-center">
-            <div id="courseList"
-                class="courseList ml-10 min-[1200px]:ml-24 mr-10 p-5 rounded-xl h-[calc(100vh_-_19rem)] overflow-auto w-96 min-[1200px]:w-11/12 my-5 min-[1200px]:mt-0"
+            <div class="ml-10 min-[1200px]:ml-24 mr-10 p-5 rounded-xl h-[calc(100vh_-_19rem)] w-96 min-[1200px]:w-11/12 my-5 min-[1200px]:mt-0"
                 style="background-color: #dfe7d5;">
-
+                <div class="z-20 w-full h-full flex justify-center items-center">
+                    <div id="coffeeIcon" class="z-30 w-20 h-20 flex justify-center items-center rounded-full animate-bounce invisible" style="background-color: #E3CAA5;">
+                        <i class="bi bi-cup-hot text-white" style="font-size: 50px;"></i>
+                    </div>
+                </div>
+                <div id="coffeeBackground" class="z-10 rounded-xl bg-black opacity-30 w-full h-[calc(100vh_-_20.5rem)] -mt-[calc(100vh_-_21rem)] invisible"></div>
+                <div id="courseList" class="courseList rounded-xl z-0 -mt-[calc(100vh_-_20rem)] h-[calc(100vh_-_20rem)]"></div>
             </div>
         </div>
         <div class="max-[1200px]:order-first order-none">
@@ -70,7 +75,8 @@
                     </div>
                     <div class="flex justify-center">
                         <button
-                            class="text-gray-400 bg-sky-200 font-medium rounded-lg text-lg hover:scale-75 duration-500 p-4" onclick="addFollowCourse()">關注課程</button>
+                            class="text-gray-400 bg-sky-200 font-medium rounded-lg text-lg hover:scale-75 duration-500 p-4"
+                            onclick="addFollowCourse()">關注課程</button>
                     </div>
                 </div>
             </div>
