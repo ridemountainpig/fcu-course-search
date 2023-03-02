@@ -5,6 +5,8 @@ $(document).on('keypress', function (e) {
 });
 
 function addFollowCourse() {
+    $('#coffeeIcon').removeClass('invisible');
+    $('#coffeeBackground').removeClass('invisible');
     let courseNumber = $("#courseInput").val();
     $("#courseInput").val("");
     if ($.isNumeric(courseNumber) && courseNumber.toString().length == 4) {
@@ -27,10 +29,15 @@ function addFollowCourse() {
                 }
             }
         })
+    } else {
+        $('#coffeeIcon').addClass('invisible');
+        $('#coffeeBackground').addClass('invisible');
     }
 }
 
 function deleteFollowCourse(courseNumber) {
+    $('#coffeeIcon').removeClass('invisible');
+    $('#coffeeBackground').removeClass('invisible');
     let followList = localStorage.getItem("followList");
     followList = followList.split(",");
     followList.splice(followList.indexOf(courseNumber.toString()), 1);
@@ -85,7 +92,7 @@ function generateCourseList() {
                                 <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
                             </div>
                             <div class="flex justify-center">
-                                <button class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer hover:scale-75 duration-500 bg-red-200" onclick="deleteFollowCourse(${courseData[0].courseNumber})">取消關注</button>
+                                <button class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[0].courseNumber})">取消關注</button>
                             </div>
                         </div>
                     `;
@@ -105,5 +112,5 @@ function generateCourseList() {
     setTimeout(function () {
         $('#coffeeIcon').addClass('invisible');
         $('#coffeeBackground').addClass('invisible');
-    }, 2000);
+    }, 1500);
 }
