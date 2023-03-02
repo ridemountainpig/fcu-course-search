@@ -29,7 +29,7 @@ function getGeneralStudies(courseData) {
                     <div>${courseData[i].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[i].courseSum}</div>
                 </div>
                 <div class="flex justify-center">
-                    <a href="${courseData[i].courseIntroduceUrl}" target="_blank" class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer hover:scale-75 duration-500" style="background-color: #dfe7d5;">課程大綱</a>
+                    <a href="${courseData[i].courseIntroduceUrl}" target="_blank" class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer" style="background-color: #dfe7d5;">課程大綱</a>
                 </div>
             </div>
         `;
