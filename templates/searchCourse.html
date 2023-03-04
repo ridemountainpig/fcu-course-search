@@ -15,7 +15,17 @@
 <body class="h-screen bg-slate-100">
     <div class="flex items-center max-[520px]:ml-8 min-[520px]:ml-24 h-1/4">
         <div>
-            <div class="font-bold text-4xl text-gray-600">Course Number</div>
+            <div class="cursor-pointer min-[650px]:hidden">
+                <i class="bi bi-arrow-left-square text-gray-400 font-bold" style="font-size: 30px;"
+                    onclick="history.back()"></i>
+            </div>
+            <div class="flex font-bold text-4xl text-gray-600">
+                <div class="cursor-pointer max-[651px]:hidden">
+                    <i class="bi bi-arrow-left-square text-gray-400 font-bold pr-2" style="font-size: 30px;"
+                        onclick="history.back()"></i>
+                </div>
+                Course Number
+            </div>
             <div class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
                 style="width: 122px; letter-spacing: 10px;">課程號碼</div>
         </div>
