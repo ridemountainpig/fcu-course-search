@@ -71,11 +71,11 @@ function generateCourseList() {
                 url: "/getCourse/" + followList[i],
                 success: function (courseData) {
                     let courseHtml = `
-                        <div class="min-[930px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
+                        <div class="min-[1201px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
                             <div id="courseNumber" class="flex justify-center items-center p-5 m-3 text-gray-600 font-extrabold text-lg bg-slate-100 rounded-lg">
                                 ${courseData[0].courseNumber}
                             </div>
-                            <div class="flex justify-start max-[930px]:ml-5" style="width: 260px;">
+                            <div class="flex justify-start max-[1201px]:ml-5" style="width: 260px;">
                                 <div>
                                     <div id="courseName" class="text-gray-600 font-bold text-xl">
                                         ${courseData[0].courseName}
@@ -88,7 +88,7 @@ function generateCourseList() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-start min-[930px]:justify-center items-center text-orange-400 font-bold text-xl max-[930px]:ml-5 mt-2">
+                            <div class="flex justify-start justify-center items-center text-orange-400 font-bold text-xl mt-2">
                                 <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
                             </div>
                             <div class="flex justify-center">

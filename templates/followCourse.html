@@ -24,24 +24,39 @@
 </head>
 
 <body class="h-screen bg-slate-100">
-    <div class="flex items-center max-[1200px]:justify-center min-[1200px]:ml-24 max-[465px]:ml-10 h-1/4">
+    <div class="flex items-center max-[1200px]:justify-center min-[1201px]:ml-24 max-[465px]:ml-10 h-1/4">
         <div class="w-96">
-            <div class="font-bold text-4xl text-gray-600">Follow Course</div>
+            <div class="cursor-pointer min-[1201px]:hidden">
+                <i class="bi bi-arrow-left-square text-gray-400 font-bold" style="font-size: 30px;"
+                    onclick="history.back()"></i>
+            </div>
+            <div class="flex font-bold text-4xl text-gray-600 mt-2">
+                <div class="cursor-pointer max-[1200px]:hidden">
+                    <i class="bi bi-arrow-left-square text-gray-400 font-bold pr-2" style="font-size: 30px;"
+                        onclick="history.back()"></i>
+                </div>
+                Follow Course
+            </div>
             <div class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
                 style="width: 122px; letter-spacing: 10px;">關注課程</div>
         </div>
     </div>
     <div class="flex max-[1200px]:flex-col h-3/4">
         <div class="flex min-[1200px]:flex-auto justify-center">
-            <div class="ml-10 min-[1200px]:ml-24 mr-10 p-5 rounded-xl h-[calc(100vh_-_19rem)] w-96 min-[1200px]:w-11/12 my-5 min-[1200px]:mt-0"
+            <div class="ml-10 min-[1200px]:ml-24 mr-10 p-5 rounded-xl h-[calc(100vh_-_19rem)] w-96 min-[1201px]:w-11/12 my-5 min-[1201px]:mt-0"
                 style="background-color: #dfe7d5;">
                 <div class="z-20 w-full h-full flex justify-center items-center">
-                    <div id="coffeeIcon" class="z-30 w-20 h-20 flex justify-center items-center rounded-full animate-bounce" style="background-color: #E3CAA5;">
+                    <div id="coffeeIcon"
+                        class="z-30 w-20 h-20 flex justify-center items-center rounded-full animate-bounce"
+                        style="background-color: #E3CAA5;">
                         <i class="bi bi-cup-hot text-white" style="font-size: 50px;"></i>
                     </div>
                 </div>
-                <div id="coffeeBackground" class="z-10 rounded-xl bg-black opacity-30 w-full h-[calc(100vh_-_20.5rem)] -mt-[calc(100vh_-_21rem)]"></div>
-                <div id="courseList" class="courseList rounded-xl z-0 -mt-[calc(100vh_-_20rem)] h-[calc(100vh_-_20rem)]"></div>
+                <div id="coffeeBackground"
+                    class="z-10 rounded-xl bg-black opacity-30 w-full h-[calc(100vh_-_20.5rem)] -mt-[calc(100vh_-_21rem)]">
+                </div>
+                <div id="courseList"
+                    class="courseList rounded-xl z-0 -mt-[calc(100vh_-_20rem)] h-[calc(100vh_-_20rem)]"></div>
             </div>
         </div>
         <div class="max-[1200px]:order-first order-none">
@@ -74,8 +89,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center">
-                        <button
-                            class="text-gray-400 bg-sky-200 font-medium rounded-lg text-lg p-4"
+                        <button class="text-gray-400 bg-sky-200 font-medium rounded-lg text-lg p-4"
                             onclick="addFollowCourse()">關注課程</button>
                     </div>
                 </div>
