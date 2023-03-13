@@ -78,7 +78,10 @@
             <div class="flex justify-center">
                 <div class="h-56 bg-white ml-10 min-[1200px]:mr-24 mr-10 mt-5 p-5 rounded-xl w-96">
                     <div class="h-3/5">
-                        <div class="font-medium text-sm text-gray-400 py-2">請輸入課程號碼</div>
+                        <div class="flex justify-between w-full overflow-hidden">
+                            <div class="font-medium text-sm text-gray-400 py-2">請輸入課程號碼</div>
+                            <div id="courseNumError" class="font-medium text-sm text-red-300 py-2 -mr-24 duration-500">課程號碼錯誤</div>
+                        </div>
                         <div class="relative flex justify-center items-center">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <i class="bi bi-plus-circle text-gray-400" style="font-size: 20px;"></i>

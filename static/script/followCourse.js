@@ -9,30 +9,32 @@ function addFollowCourse() {
     $('#coffeeBackground').removeClass('invisible');
     let courseNumber = $("#courseInput").val();
     $("#courseInput").val("");
-    if ($.isNumeric(courseNumber) && courseNumber.toString().length == 4) {
-        $.ajax({
-            url: "/checkcourse/" + courseNumber,
-            success: function (res) {
-                if (res == "true") {
-                    let followList = localStorage.getItem("followList");
-                    if (followList == null) {
-                        followList = [];
+    $.ajax({
+        url: "/checkcourse/" + courseNumber,
+        success: function (res) {
+            if (res == "true") {
+                let followList = localStorage.getItem("followList");
+                if (followList == null) {
+                    followList = [];
+                    followList.push(courseNumber);
+                } else {
+                    followList = followList.split(",");
+                    if (!followList.includes(courseNumber)) {
                         followList.push(courseNumber);
-                    } else {
-                        followList = followList.split(",");
-                        if (!followList.includes(courseNumber)) {
-                            followList.push(courseNumber);
-                        }
                     }
-                    localStorage.setItem("followList", followList);
-                    generateCourseList();
                 }
+                localStorage.setItem("followList", followList);
+                generateCourseList();
+            } else {
+                $('#courseNumError').removeClass('-mr-24');
+                setTimeout(function () {
+                    $('#courseNumError').addClass('-mr-24');
+                }, 3000);
+                $('#coffeeIcon').addClass('invisible');
+                $('#coffeeBackground').addClass('invisible');
             }
-        })
-    } else {
-        $('#coffeeIcon').addClass('invisible');
-        $('#coffeeBackground').addClass('invisible');
-    }
+        }
+    })
 }
 
 function deleteFollowCourse(courseNumber) {
