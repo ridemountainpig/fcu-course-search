@@ -32,24 +32,24 @@
     </div>
 
     <div class="flex justify-center items-start h-3/4 w-full">
-        <div id="searchBox" class="rounded-2xl opacity-70 -skew-x-[10deg] duration-700 w-4/6 h-5/6 shadow-2xl"
+        <div id="searchBox" class="rounded-2xl opacity-70 min-[600px]:w-4/6 h-5/6 shadow-2xl"
             style="background-color: #dfe7d5;">
             <div id="searchInput" class="flex items-center h-5/6">
-                <div class="skew-x-[10deg] w-full">
+                <div class="w-full">
                     <div class="flex justify-center">
                         <div class="font-medium text-xl text-gray-400 py-2">請輸入課程號碼</div>
                     </div>
-                    <div class="flex justify-center">
+                    <div class="min-[600px]:flex max-[600px]:flex-col justify-center px-5">
                         <input type="number" id="courseInput"
-                            class="block w-3/6 p-4 pl-10 text-base text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 border-t-8 border-b-8 border-l-8 border-white z-10"
+                            class="block max-[600px]:mx-auto min-[600px]:w-3/6 max-[600px]:w-full max-[600px]:rounded-lg max-[600px]:border-8 p-4 pl-10 text-base max-[600px]:text-center text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 border-t-8 border-b-8 border-l-8 border-white z-10"
                             placeholder="Course Number">
                         <button
-                            class="text-gray-400 bg-orange-100 font-medium rounded-tr-lg rounded-br-lg text-lg p-4 border-t-8 border-b-8 border-r-8 border-white"
+                            class="block text-gray-400 bg-orange-100 font-medium max-[600px]:mx-auto max-[600px]:rounded-lg max-[600px]:border-8 max-[600px]:mt-2 rounded-tr-lg rounded-br-lg text-lg p-4 border-t-8 border-b-8 border-r-8 border-white"
                             onclick="searchCourse()">查詢課程</button>
                     </div>
                 </div>
             </div>
-            <div id="courseListBox" class="flex justify-center items-center h-full hidden">
+            <div id="courseListBox" class="flex justify-center items-center h-full hidden px-2">
                 <div id="courseList"></div>
             </div>
         </div>

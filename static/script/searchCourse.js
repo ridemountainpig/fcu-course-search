@@ -11,7 +11,6 @@ function searchCourse() {
         return
     }
 
-    $('#searchBox').removeClass('-skew-x-[10deg]');
     $('#searchInput').addClass('hidden');
     $('#courseListBox').removeClass('hidden');
     $('#courseInput').val("");
@@ -49,7 +48,7 @@ function searchCourse() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-start min-[930px]:justify-center items-center text-orange-400 font-bold text-xl mt-2">
+                            <div class="flex justify-start justify-center items-center text-orange-400 font-bold text-xl mt-2">
                                 <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
                             </div>
                             <div class="flex justify-center">
@@ -88,7 +87,6 @@ function searchCourse() {
 }
 
 function resetSearchCourse() {
-    $('#searchBox').addClass('-skew-x-[10deg]');
     $('#searchInput').removeClass('hidden');
     $('#courseListBox').addClass('hidden');
     $('#courseList').empty();
