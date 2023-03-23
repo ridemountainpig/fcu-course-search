@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-22QRKM1PH4');
+    </script>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +90,8 @@
                     <div class="h-3/5">
                         <div class="flex justify-between w-full overflow-hidden">
                             <div class="font-medium text-sm text-gray-400 py-2">請輸入課程號碼</div>
-                            <div id="courseNumError" class="font-medium text-sm text-red-300 py-2 -mr-24 duration-500">課程號碼錯誤</div>
+                            <div id="courseNumError" class="font-medium text-sm text-red-300 py-2 -mr-24 duration-500">
+                                課程號碼錯誤</div>
                         </div>
                         <div class="relative flex justify-center items-center">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
