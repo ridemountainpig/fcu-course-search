@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 from script import courseSearch as cs
+from script import init
 import os
 
 app = Flask(__name__)
@@ -42,6 +43,10 @@ def getGeneralStudiesList():
 def gitPull():
     os.system('git pull')
     return "Git Pull Success"
+
+@app.route('/initYearAndSemester')
+def initYearAndSemester():
+    return init.getSystemYear()
 
 if __name__ == '__main__': 
     app.run(host='0.0.0.0', port=81)
