@@ -7,7 +7,6 @@ on:
 # on:
 #   schedule:
 #     - cron: '0 */6 * * *'
-
 jobs:
   make-request:
     runs-on: ubuntu-latest
@@ -20,11 +19,9 @@ jobs:
           response=$(curl -s https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester)
           semester=$(echo "$response" | jq -r '.semester')
           year=$(echo "$response" | jq -r '.year')
-          echo "::set-output name=semester::$semester"
-          echo "::set-output name=year::$year"
+          echo "semester=$semester" >> $GITHUB_ENV
+          echo "year=$year" >> $GITHUB_ENV
       - name: Print semester and year
         run: |
-          echo "semester=${{ steps.init.outputs.semester }}" >> $GITHUB_ENV
-          echo "year=${{ steps.init.outputs.year }}" >> $GITHUB_ENV
-          echo "semester=${{ steps.init.outputs.semester }}"
-          echo "year=${{ steps.init.outputs.year }}"
+          echo "semester=${{ env.semester }}"
+          echo "year=${{ env.year }}"
