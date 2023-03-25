@@ -42,3 +42,19 @@ jobs:
       - name: Print updated file contents
         run: |
           cat script/courseSearch.py
+          
+      - name: Configure git
+        run: |
+          git config --global user.name "ridemountainpig"
+          git config --global user.email "lin0905580802@gmail.com"
+          
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "feat: change course year and semester"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: initYearAndSemester-actions-dev
+          github_token: ${{ secrets.GITHUB_TOKEN }}
