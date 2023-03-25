@@ -16,9 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Make a GET request to a URL
         run: |
-          curl https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester
-          | jq '.semester' > semester.txt
-          | jq '.year' > year.txt
+          curl https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester | jq '.semester' > semester.txt | jq '.year' > year.txt
       - name: Print semester and year
         run: |
           echo ::set-output name=semester::$(cat semester.txt)
