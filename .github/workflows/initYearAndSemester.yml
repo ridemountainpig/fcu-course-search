@@ -35,8 +35,8 @@ jobs:
             const fs = require('fs');
             const filePath = '${{ github.workspace }}/script/courseSearch.py';
             let fileContent = fs.readFileSync(filePath, 'utf8');
-            fileContent = fileContent.replace(/semester = '.+'/g, `semester = '${{ env.year }}'`);
-            fileContent = fileContent.replace(/year = '.+'/g, `year = '${{ env.semester }}'`);
+            fileContent = fileContent.replace(/semester = '.+'/g, `semester = '${{ env.semester }}'`);
+            fileContent = fileContent.replace(/year = '.+'/g, `year = '${{ env.year }}'`);
             fs.writeFileSync(filePath, fileContent);
             
       - name: Print updated file contents
