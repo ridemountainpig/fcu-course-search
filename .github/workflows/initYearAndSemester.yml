@@ -15,11 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Make a GET request to a URL
+        id: init
         run: |
-          curl https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester | jq '.semester' > semester.txt | jq '.year' > year.txt
+          response=$(curl -s https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester)
+          semester=$(echo "$response" | jq -r '.semester')
+          year=$(echo "$response" | jq -r '.year')
+          echo "::set-output name=semester::$semester"
+          echo "::set-output name=year::$year"
       - name: Print semester and year
         run: |
-          echo "semester=$(cat semester.txt) >> $GITHUB_OUTPUT
-          echo "year=$(cat year.txt) >> $GITHUB_OUTPUT
-          cat semester.txt
-          cat year.txt
+          echo "semester=${{ steps.init.outputs.semester }}" >> $GITHUB_ENV
+          echo "year=${{ steps.init.outputs.year }}" >> $GITHUB_ENV
+          echo "semester=${{ steps.init.outputs.semester }}"
+          echo "year=${{ steps.init.outputs.year }}"
