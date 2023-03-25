@@ -17,3 +17,9 @@ jobs:
       - name: Make a GET request to a URL
         run: |
           curl https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester
+          | jq '.semester' > semester.txt
+          | jq '.year' > year.txt
+      - name: Print semester and year
+        run: |
+          echo ::set-output name=semester::$(cat semester.txt)
+          echo ::set-output name=year::$(cat year.txt)
