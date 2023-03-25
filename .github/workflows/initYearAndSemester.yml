@@ -19,5 +19,5 @@ jobs:
           curl https://fcu-course-search.ridemountainpig.repl.co/initYearAndSemester | jq '.semester' > semester.txt | jq '.year' > year.txt
       - name: Print semester and year
         run: |
-          echo "semester=${{ $(cat semester.txt) }}" >> $GITHUB_OUTPUT
-          echo "year=${{ $(cat year.txt) }}" >> $GITHUB_OUTPUT
+          echo "semester=$(cat semester.txt) >> $GITHUB_OUTPUT
+          echo "year=$(cat year.txt) >> $GITHUB_OUTPUT
