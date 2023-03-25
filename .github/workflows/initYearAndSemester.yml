@@ -48,6 +48,15 @@ jobs:
           git config --global user.name "ridemountainpig"
           git config --global user.email "lin0905580802@gmail.com"
           
+      - name: Check if there are changes
+        run: |
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to commit."
+            exit 0
+          else
+            echo "Changes detected, committing and pushing."
+          fi
+          
       - name: Commit changes
         run: |
           git add .
