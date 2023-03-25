@@ -21,3 +21,5 @@ jobs:
         run: |
           echo "semester=$(cat semester.txt) >> $GITHUB_OUTPUT
           echo "year=$(cat year.txt) >> $GITHUB_OUTPUT
+          cat semester.txt
+          cat year.txt
