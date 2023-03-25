@@ -3,8 +3,8 @@ import requests
 s = requests.Session()
 
 # system year
-year = '111'
-semester = '2'
+year = '2'
+semester = '111'
 
 def checkCourse(courseCode):
     data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":true,"value":"' + \
