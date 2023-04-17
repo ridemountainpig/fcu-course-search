@@ -18,4 +18,4 @@ jobs:
         
       - name: Make a GET request to a URL
         run: |
-          curl https://fcu-course-search.ridemountainpig.repl.co/GITPULL
+          curl https://fcu-course-search.repl.co/GITPULL
