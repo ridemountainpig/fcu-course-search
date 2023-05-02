@@ -90,7 +90,7 @@ function generateCourseList() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-start justify-center items-center text-orange-400 font-bold text-xl mt-2">
+                            <div class="flex justify-center items-center text-orange-400 font-bold text-xl mt-2">
                                 <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
                             </div>
                             <div class="flex justify-center">

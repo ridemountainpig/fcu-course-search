@@ -48,11 +48,11 @@ function searchCourse() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-start justify-center items-center text-orange-400 font-bold text-xl mt-2">
+                            <div class="flex justify-center items-center text-orange-400 font-bold text-xl mt-2">
                                 <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
                             </div>
                             <div class="flex justify-center">
-                                <a href="${courseData[0].courseIntroduceUrl}" target="_blank" class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer" style="background-color: #dfe7d5;">課程大綱</a>
+                                <a href="${courseData[0].courseIntroduceUrl}" target="_blank" class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer bg-backgroundGreen">課程大綱</a>
                             </div>
                         </div>
                     `;
