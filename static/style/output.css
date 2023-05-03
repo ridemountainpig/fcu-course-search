@@ -784,6 +784,20 @@ video {
   animation: bounce 1s infinite;
 }
 
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
