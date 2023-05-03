@@ -10,6 +10,9 @@ module.exports = {
         backgroundGreen: "#dfe7d5",
         backgroundBrown: "#E3CAA5",
       },
+      fontSize: {
+        '4.5xl': '2.625rem',
+      },
       animation: {
         'bounce-y': 'bounce-y 1s infinite',
         'fade-in': 'fade-in 0.5s ease-out'
