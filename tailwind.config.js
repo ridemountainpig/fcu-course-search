@@ -19,6 +19,9 @@ module.exports = {
           '50%': { transform: 'translateY(-25%)' },
         },
       },
+      spacing: {
+        '26': '6.5rem',
+      }
     },
     plugins: [],
   }

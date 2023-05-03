@@ -530,10 +530,6 @@ video {
   visibility: hidden;
 }
 
-.fixed {
-  position: fixed;
-}
-
 .absolute {
   position: absolute;
 }
@@ -547,52 +543,16 @@ video {
   bottom: 0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.bottom-6 {
+  bottom: 1.5rem;
 }
 
 .left-0 {
   left: 0px;
 }
 
-.right-0 {
-  right: 0px;
-}
-
-.right-10 {
-  right: 2.5rem;
-}
-
-.right-20 {
-  right: 5rem;
-}
-
-.right-24 {
-  right: 6rem;
-}
-
-.bottom-10 {
-  bottom: 2.5rem;
-}
-
-.bottom-6 {
-  bottom: 1.5rem;
-}
-
-.bottom-5 {
-  bottom: 1.25rem;
-}
-
-.bottom-4 {
-  bottom: 1rem;
-}
-
-.bottom-3 {
-  bottom: 0.75rem;
-}
-
-.right-28 {
-  right: 7rem;
+.right-9 {
+  right: 2.25rem;
 }
 
 .z-0 {
@@ -1159,24 +1119,9 @@ video {
   color: rgb(252 165 165 / var(--tw-text-opacity));
 }
 
-.text-slate-100 {
-  --tw-text-opacity: 1;
-  color: rgb(241 245 249 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-backgroundGreen {
-  --tw-text-opacity: 1;
-  color: rgb(223 231 213 / var(--tw-text-opacity));
-}
-
-.text-emerald-700 {
-  --tw-text-opacity: 1;
-  color: rgb(4 120 87 / var(--tw-text-opacity));
 }
 
 .opacity-30 {
@@ -1198,36 +1143,12 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
 }
 
 .duration-500 {
   transition-duration: 500ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
-.duration-700 {
-  transition-duration: 700ms;
-}
-
-.hover\:bottom-5:hover {
-  bottom: 1.25rem;
-}
-
-.hover\:mb-5:hover {
-  margin-bottom: 1.25rem;
 }
 
 .hover\:-translate-y-1:hover {
@@ -1362,6 +1283,10 @@ video {
 }
 
 @media (min-width: 520px) {
+  .min-\[520px\]\:right-26 {
+    right: 6.5rem;
+  }
+
   .min-\[520px\]\:mx-24 {
     margin-left: 6rem;
     margin-right: 6rem;
