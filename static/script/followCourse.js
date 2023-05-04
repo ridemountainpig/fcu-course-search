@@ -73,19 +73,19 @@ function generateCourseList() {
                 url: "/getCourse/" + followList[i],
                 success: function (courseData) {
                     let courseHtml = `
-                        <div class="min-[1201px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
+                        <div class="min-[1301px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
                             <div id="courseNumber" class="flex justify-center items-center p-5 m-3 text-gray-600 font-extrabold text-lg bg-slate-100 rounded-lg">
                                 ${courseData[0].courseNumber}
                             </div>
-                            <div class="flex justify-start max-[1201px]:ml-5" style="width: 260px;">
+                            <div class="flex justify-start max-[1301px]:ml-5 min-[1301px]:w-64">
                                 <div>
-                                    <div id="courseName" class="text-gray-600 font-bold text-xl">
+                                    <div id="courseName" class="text-gray-600 font-bold min-[1301px]:text-lg text-base">
                                         ${courseData[0].courseName}
                                     </div>
-                                    <div id="courseTime" class="text-gray-400 font-medium text-sm">
+                                    <div id="courseTime" class="text-gray-400 font-medium min-[1301px]:text-sm text-xs">
                                         ${courseData[0].courseDate}
                                     </div>
-                                    <div id="courseTime" class="text-gray-400 font-medium text-sm">
+                                    <div id="courseTime" class="text-gray-400 font-medium min-[1301px]:text-sm text-xs">
                                         ${courseData[0].courseClass}
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ function generateCourseList() {
                                 <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
                             </div>
                             <div class="flex justify-center">
-                                <button class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[0].courseNumber})">取消關注</button>
+                                <button class="p-3 m-3 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[0].courseNumber})">取消關注</button>
                             </div>
                         </div>
                     `;
