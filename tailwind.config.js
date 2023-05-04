@@ -10,6 +10,20 @@ module.exports = {
         backgroundGreen: "#dfe7d5",
         backgroundBrown: "#E3CAA5",
       },
+      height: {
+        '70%': '70%',
+        '80%': '80%',
+        '90%': '90%',
+        '95%': '95%',
+        '88': '22rem',
+        '92': '23rem',
+      },
+      margin: {
+        '90%': '90%',
+        '84': '21rem', 
+        '88': '22rem',
+        '92': '23rem',
+      },
       fontSize: {
         '4.5xl': '2.625rem',
       },

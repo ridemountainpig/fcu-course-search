@@ -5,8 +5,10 @@ $(document).on('keypress', function (e) {
 });
 
 function addFollowCourse() {
-    $('#coffeeIcon').removeClass('invisible');
-    $('#coffeeBackground').removeClass('invisible');
+    $('#coffeeIcon').addClass('w-full h-full');
+    $('#coffeeBackground').addClass('w-full h-full');
+    $('#coffeeIcon').removeClass('hidden');
+    $('#coffeeBackground').removeClass('hidden');
     let courseNumber = $("#courseInput").val();
     $("#courseInput").val("");
     $.ajax({
@@ -30,16 +32,20 @@ function addFollowCourse() {
                 setTimeout(function () {
                     $('#courseNumError').addClass('-mr-24');
                 }, 3000);
-                $('#coffeeIcon').addClass('invisible');
-                $('#coffeeBackground').addClass('invisible');
+                $('#coffeeIcon').addClass('hidden');
+                $('#coffeeBackground').addClass('hidden');
+                $('#coffeeIcon').removeClass('w-full h-full');
+                $('#coffeeBackground').removeClass('w-full h-full');
             }
         }
     })
 }
 
 function deleteFollowCourse(courseNumber) {
-    $('#coffeeIcon').removeClass('invisible');
-    $('#coffeeBackground').removeClass('invisible');
+    $('#coffeeIcon').addClass('w-full h-full');
+    $('#coffeeBackground').addClass('w-full h-full');
+    $('#coffeeIcon').removeClass('hidden');
+    $('#coffeeBackground').removeClass('hidden');
     let followList = localStorage.getItem("followList");
     followList = followList.split(",");
     followList.splice(followList.indexOf(courseNumber.toString()), 1);
@@ -51,8 +57,10 @@ function deleteFollowCourse(courseNumber) {
 }
 
 function generateCourseList() {
-    $('#coffeeIcon').removeClass('invisible');
-    $('#coffeeBackground').removeClass('invisible');
+    $('#coffeeIcon').addClass('w-full h-full');
+    $('#coffeeBackground').addClass('w-full h-full');
+    $('#coffeeIcon').removeClass('hidden');
+    $('#coffeeBackground').removeClass('hidden');
     let followList = localStorage.getItem("followList");
     if (followList == null) {
         followList = [];
@@ -104,7 +112,9 @@ function generateCourseList() {
         }
     } else {
         let courseHtml = `
-            <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600" style="margin-top: 5%;">尚未關注課程</div>
+            <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600" style="margin-top: 5%;">
+                尚未關注課程
+            </div>
             <i class="bi bi-emoji-smile flex justify-center text-gray-600" style="margin-top: 10%; font-size: 80px;"></i>
         `
         $('#followNumber').empty();
@@ -112,7 +122,9 @@ function generateCourseList() {
         $('#courseList').html(courseHtml);
     }
     setTimeout(function () {
-        $('#coffeeIcon').addClass('invisible');
-        $('#coffeeBackground').addClass('invisible');
+        $('#coffeeIcon').removeClass('w-full h-full');
+        $('#coffeeBackground').removeClass('w-full h-full');
+        $('#coffeeIcon').addClass('hidden');
+        $('#coffeeBackground').addClass('hidden');
     }, 1500);
 }

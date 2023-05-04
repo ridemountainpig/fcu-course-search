@@ -23,7 +23,7 @@
 </head>
 
 <body class="h-screen bg-slate-100">
-    <div class="flex items-center max-[520px]:ml-8 min-[520px]:ml-24 h-1/4">
+    <div class="flex items-center max-[520px]:ml-8 min-[520px]:ml-24 h-44">
         <div>
             <div class="cursor-pointer min-[650px]:hidden">
                 <i class="bi bi-arrow-left-square text-gray-400 font-bold" style="font-size: 30px;"
@@ -41,9 +41,10 @@
         </div>
     </div>
 
-    <div class="flex justify-center items-start h-3/4 w-full">
-        <div id="searchBox" class="rounded-2xl opacity-70 min-[600px]:w-4/6 h-[calc(100vh*0.75_-_2rem)] bg-backgroundGreen">
-            <div id="searchInput" class="flex items-center h-5/6">
+    <div class="flex justify-center items-start h-fit w-full">
+        <div id="searchBox"
+            class="rounded-2xl opacity-70 min-[600px]:w-4/6 p-10 mx-5 bg-backgroundGreen">
+            <div id="searchInput" class="flex items-center h-full">
                 <div class="w-full">
                     <div class="flex justify-center">
                         <div class="font-medium text-xl text-gray-400 py-2">請輸入課程號碼</div>
@@ -58,8 +59,10 @@
                     </div>
                 </div>
             </div>
-            <div id="courseListBox" class="flex justify-center items-center h-full px-2">
-                <div id="courseList"></div>
+            <div id="courseListBox" class="hidden h-full my-auto">
+                <div class="flex justify-center items-center h-full px-2">
+                    <div id="courseList"></div>
+                </div>
             </div>
         </div>
     </div>
