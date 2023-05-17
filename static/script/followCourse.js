@@ -11,6 +11,20 @@ function addFollowCourse() {
     $('#coffeeBackground').removeClass('hidden');
     let courseNumber = $("#courseInput").val();
     $("#courseInput").val("");
+    if (courseNumber == "") {
+        $('#coffeeIcon').removeClass('w-full h-full');
+        $('#coffeeBackground').removeClass('w-full h-full');
+        $('#coffeeIcon').addClass('hidden');
+        $('#coffeeBackground').addClass('hidden');
+
+        $('#courseNumError').text("請輸入課程號碼");
+        $('#courseNumError').removeClass('-mr-28');
+        setTimeout(function () {
+            $('#courseNumError').addClass('-mr-28');
+        }, 3000);
+
+        return;
+    }
     $.ajax({
         url: "/checkcourse/" + courseNumber,
         success: function (res) {
@@ -28,10 +42,12 @@ function addFollowCourse() {
                 localStorage.setItem("followList", followList);
                 generateCourseList();
             } else {
-                $('#courseNumError').removeClass('-mr-24');
+                $('#courseNumError').text("課程號碼錯誤");
+                $('#courseNumError').removeClass('-mr-28');
                 setTimeout(function () {
-                    $('#courseNumError').addClass('-mr-24');
+                    $('#courseNumError').addClass('-mr-28');
                 }, 3000);
+                
                 $('#coffeeIcon').addClass('hidden');
                 $('#coffeeBackground').addClass('hidden');
                 $('#coffeeIcon').removeClass('w-full h-full');
