@@ -9,6 +9,14 @@ module.exports = {
       colors: {
         backgroundGreen: "#dfe7d5",
         backgroundBrown: "#E3CAA5",
+        gradient1: "#FFABAB",
+        gradient2: "#FEF2F4",
+        gradient3: "#D9ACF5",
+        gradient4: "#FDEBED",
+      },
+      width: {
+        '88': '22rem',
+        '100': '25rem',
       },
       height: {
         '70%': '70%',

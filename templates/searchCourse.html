@@ -41,19 +41,24 @@
         </div>
     </div>
 
-    <div class="flex justify-center items-start h-fit w-full">
-        <div id="searchBox" class="rounded-2xl opacity-70 min-[600px]:w-4/6 py-40 mx-5 bg-backgroundGreen">
-            <div id="searchInput" class="flex items-center h-full py-10">
-                <div class="w-full">
+    <div class="flex justify-center items-start h-[calc(100vh_-_11rem)] w-full">
+        <div id="searchBox" class="h-full">
+            <div id="searchInput" class="w-full h-full flex justify-center items-center -mt-20">
+                <div class="relative">
+                    <div class="absolute -z-10 top-0 left-0 -mt-40 -ml-72 hidden h-96 w-96 rounded-full bg-gradient-to-r from-gradient3 to-gradient4 opacity-40 blur-3xl min-[700px]:block"></div>
+                    <div class="absolute -z-10 button-0 right-0 -mt-10 -mr-72 hidden h-96 w-96 rounded-full bg-gradient-to-l from-gradient1 to-gradient2 opacity-40 blur-3xl min-[700px]:block"></div>
                     <div class="flex justify-center">
                         <div class="font-medium text-xl text-gray-400 py-2">請輸入課程號碼</div>
                     </div>
-                    <div class="min-[600px]:flex max-[600px]:flex-col justify-center px-5">
-                        <input type="number" id="courseInput"
-                            class="block max-[600px]:mx-auto min-[600px]:w-3/6 max-[600px]:w-full max-[600px]:rounded-lg max-[600px]:border-8 p-4 px-10 text-base max-[600px]:text-center text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 border-t-8 border-b-8 border-l-8 border-white z-10"
+                    <div class="min-[700px]:flex max-[700px]:flex-col justify-center px-5">
+                        <input id="courseInput"
+                            class="block max-[700px]:mx-auto max-[700px]:w-full max-[700px]:rounded-lg max-[700px]:border-8 
+                                p-4 px-10 w-100 text-base max-[700px]:text-center text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 
+                                border-t-8 border-b-8 border-l-8 border-white z-10"
                             placeholder="Course Number">
                         <button
-                            class="block text-gray-400 bg-orange-100 font-medium max-[600px]:mx-auto max-[600px]:rounded-lg max-[600px]:border-8 max-[600px]:mt-2 rounded-tr-lg rounded-br-lg text-lg p-4 border-t-8 border-b-8 border-r-8 border-white"
+                            class="block text-gray-400 bg-orange-100 font-medium max-[700px]:mx-auto max-[700px]:rounded-lg max-[700px]:border-8 max-[700px]:mt-2 
+                                rounded-tr-lg rounded-br-lg text-lg p-4 border-t-8 border-b-8 border-r-8 border-white"
                             onclick="searchCourse()">查詢課程</button>
                     </div>
                 </div>
