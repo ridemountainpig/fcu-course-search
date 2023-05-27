@@ -128,7 +128,7 @@ function generateCourseList() {
         }
     } else {
         let courseHtml = `
-            <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600" style="margin-top: 5%;">
+            <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600">
                 尚未關注課程
             </div>
             <i class="bi bi-emoji-smile flex justify-center text-gray-600" style="margin-top: 10%; font-size: 80px;"></i>
