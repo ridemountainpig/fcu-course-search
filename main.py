@@ -11,10 +11,6 @@ app.config['DEBUG'] = True
 def index():
     return render_template('index.html')
 
-@app.route('/getCourse/<course>')
-def getCourse(course):
-    return cs.getCourseByCode(course)
-
 @app.route('/searchcourse')
 def searchCourse():
     return render_template('searchCourse.html')
@@ -33,7 +29,10 @@ def searchCourseByCode(course):
 
 @app.route('/checkcourse/<course>')
 def checkCourse(course):
-    return cs.checkCourse(course)
+    if cs.searchCourseByCode(course) == "false":
+        return "false"
+    else:
+        return "true"
 
 @app.route('/getGeneralStudiesList')
 def getGeneralStudiesList():

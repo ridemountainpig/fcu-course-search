@@ -94,7 +94,7 @@ function generateCourseList() {
             if (followList[i] == '') continue
             $.ajax({
                 async: false,
-                url: "/getCourse/" + followList[i],
+                url: "/searchcourse/" + followList[i],
                 success: function (courseData) {
                     let courseHtml = `
                         <div class="min-[1301px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">

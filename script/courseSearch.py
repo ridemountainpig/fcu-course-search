@@ -6,39 +6,58 @@ s = requests.Session()
 year = '112'
 semester = '1'
 
-def checkCourse(courseCode):
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":true,"value":"' + \
-        str(courseCode) + '"},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":false,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-
-    header = {
-        "Content-Type":
+header = {
+    "Content-Type":
         "application/json",
         'User-Agent':
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-    }
+}
 
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=data,
-        headers=header
-    )
-
-    courseNumber = (response.text.split(','))[1].split(':')[1]
-    if courseNumber == '0':
-        return "false"
-    else:
-        return "true"
 
 def searchCourseByCode(courseCode):
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":true,"value":"' + \
-        str(courseCode) + '"},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":false,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-
-    header = {
-        "Content-Type":
-        "application/json",
-        'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-    }
+    data = '''
+        {
+            "baseOptions": {
+                "lang": "cht",
+                "year": ''' + year + ''',
+                "sms": ''' + semester + '''
+            },
+            "typeOptions": {
+                "code": {
+                "enabled": true,
+                "value": "''' + str(courseCode) + '''"
+                },
+                "weekPeriod": {
+                "enabled": false,
+                "week": "*",
+                "period": "*"
+                },
+                "course": {
+                "enabled": false,
+                "value": ""
+                },
+                "teacher": {
+                "enabled": false,
+                "value": ""
+                },
+                "useEnglish": {
+                "enabled": false
+                },
+                "useLanguage": {
+                "enabled": false,
+                "value": "01"
+                },
+                "specificSubject": {
+                "enabled": false,
+                "value": "1"
+                },
+                "courseDescription": {
+                "enabled": false,
+                "value": ""
+                }
+            }
+        }
+    '''
 
     response = s.post(
         "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
@@ -50,20 +69,14 @@ def searchCourseByCode(courseCode):
     courseNumber = (temp.text.split(','))[1].split(':')[1]
     if courseNumber == '0':
         return "false"
-    else:   
+    else:
         courseList = response.text.split(r'{\"scr_selcode\":\"')
         courseData = byCodeCourseListToDict(courseList)
         return courseData
 
+
 def getGeneralCourseList():
     data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-
-    header = {
-        "Content-Type":
-        "application/json",
-        'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-    }
 
     response = s.post(
         "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
@@ -74,15 +87,9 @@ def getGeneralCourseList():
     courseList = response.text.split(r'{\"scr_selcode\":\"')
     return courseListToDict(courseList)
 
+
 def getAppGeneralCourseList():
     data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-
-    header = {
-        "Content-Type":
-        "application/json",
-        'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-    }
 
     response = s.post(
         "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
@@ -92,26 +99,6 @@ def getAppGeneralCourseList():
 
     courseList = response.text.split(r'{\"scr_selcode\":\"')
     return appCourseListToDict(courseList)
-
-def getCourseByCode(courseCode):
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":true,"value":"' + \
-        str(courseCode) + '"},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":false,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-
-    header = {
-        "Content-Type":
-        "application/json",
-        'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
-    }
-
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=data,
-        headers=header
-    )
-
-    courseList = response.text.split(r'{\"scr_selcode\":\"')
-    return byCodeCourseListToDict(courseList)
 
 
 def byCodeCourseListToDict(courseList):
@@ -180,6 +167,7 @@ def courseListToDict(courseList):
             }
             count += 1
     return result
+
 
 def appCourseListToDict(courseList):
     result = []
