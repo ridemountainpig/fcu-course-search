@@ -75,30 +75,98 @@ def searchCourseByCode(courseCode):
         return courseData
 
 
+generalStudiesData = [
+    '''
+    {
+        "baseOptions": {
+            "lang": "cht",
+            "year": ''' + year + ''',
+            "sms": ''' + semester + '''
+        },
+        "typeOptions": {
+            "degree": "1",
+            "deptId": "GE",
+            "unitId": "GE02",
+            "classId": "*"
+        }
+    }
+    ''',
+    '''
+    {
+        "baseOptions": {
+            "lang": "cht",
+            "year": ''' + year + ''',
+            "sms": ''' + semester + '''
+        },
+        "typeOptions": {
+            "degree": "1",
+            "deptId": "GE",
+            "unitId": "GE03",
+            "classId": "*"
+        }
+    }
+    ''',
+    '''
+    {
+        "baseOptions": {
+            "lang": "cht",
+            "year": ''' + year + ''',
+            "sms": ''' + semester + '''
+        },
+        "typeOptions": {
+            "degree": "1",
+            "deptId": "GE",
+            "unitId": "GE04",
+            "classId": "*"
+        }
+    }
+    ''',
+    '''
+    {
+        "baseOptions": {
+            "lang": "cht",
+            "year": ''' + year + ''',
+            "sms": ''' + semester + '''
+        },
+        "typeOptions": {
+            "degree": "1",
+            "deptId": "GE",
+            "unitId": "GE05",
+            "classId": "*"
+        }
+    }
+    '''
+]
+
+
 def getGeneralCourseList():
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
+    courseData = {}
+    for d in generalStudiesData:
+        response = s.post(
+            "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType1Result",
+            data=d,
+            headers=header
+        )
+        courseList = response.text.split(r'{\"scr_selcode\":\"')
+        courseData.update({key + len(courseData): value for key, value in courseListToDict(courseList).items()})
 
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=data,
-        headers=header
-    )
-
-    courseList = response.text.split(r'{\"scr_selcode\":\"')
-    return courseListToDict(courseList)
+    return courseData
 
 
 def getAppGeneralCourseList():
-    data = '{"baseOptions":{"lang":"cht","year":' + year + ',"sms":' + semester + '},"typeOptions":{"code":{"enabled":false,"value":""},"weekPeriod":{"enabled":false,"week":"*","period":"*"},"course":{"enabled":false,"value":""},"teacher":{"enabled":false,"value":""},"useEnglish":{"enabled":false},"useLanguage":{"enabled":false,"value":"01"},"specificSubject":{"enabled":true,"value":"1"},"courseDescription":{"enabled":false,"value":""}}}'
-
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=data,
-        headers=header
-    )
-
-    courseList = response.text.split(r'{\"scr_selcode\":\"')
-    return appCourseListToDict(courseList)
+    courseData = []
+    for d in generalStudiesData:
+        courseLength = len(courseData)
+        response = s.post(
+            "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType1Result",
+            data=d,
+            headers=header
+        )
+        courseList = response.text.split(r'{\"scr_selcode\":\"')
+        for i in appCourseListToDict(courseList):
+            i['id'] += courseLength
+            courseData.append(i)
+    return courseData
 
 
 def byCodeCourseListToDict(courseList):
