@@ -1,4 +1,5 @@
 import requests
+import json
 
 s = requests.Session()
 
@@ -65,13 +66,13 @@ def searchCourseByCode(courseCode):
         headers=header
     )
 
-    temp = response
-    courseNumber = (temp.text.split(','))[1].split(':')[1]
-    if courseNumber == '0':
+    courseList = json.loads(response.text)
+    courseList = json.loads(courseList['d'])
+
+    if courseList["total"] == 0:
         return "false"
     else:
-        courseList = response.text.split(r'{\"scr_selcode\":\"')
-        courseData = byCodeCourseListToDict(courseList)
+        courseData = byCodeCourseListToDict(courseList["items"])
         return courseData
 
 
@@ -126,9 +127,11 @@ def getGeneralCourseList():
         data=generalStudiesData,
         headers=header
     )
-    courseList = response.text.split(r'{\"scr_selcode\":\"')
 
-    return courseListToDict(courseList)
+    courseList = json.loads(response.text)
+    courseList = json.loads(courseList['d'])
+
+    return courseListToDict(courseList['items'])
 
 
 def getAppGeneralCourseList():
@@ -137,9 +140,10 @@ def getAppGeneralCourseList():
         data=generalStudiesData,
         headers=header
     )
-    courseList = response.text.split(r'{\"scr_selcode\":\"')
-        
-    return appCourseListToDict(courseList)
+    courseList = json.loads(response.text)
+    courseList = json.loads(courseList['d'])
+
+    return appCourseListToDict(courseList["items"])
 
 
 def byCodeCourseListToDict(courseList):
@@ -147,22 +151,21 @@ def byCodeCourseListToDict(courseList):
     count = 0
     courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
 
-    for i in range(1, len(courseList)):
-        courseData = courseList[i].split(r'\",\"')
-        courseNumber = courseData[0]
-        courseName = courseData[2].split(r'\":\"')[1]
-        courseClass = courseData[7].split(r'\":\"')[1]
+    for i in range(len(courseList)):
+        courseNumber = courseList[i]["scr_selcode"]
+        courseName = courseList[i]["sub_name"]
+        courseClass = courseList[i]["cls_name"]
         courseDate = []
-        for i in courseData[8].split(r'\":\"')[1].split(' ')[:-1]:
-            if i != '':
-                courseDate.append(i)
+        for j in courseList[i]["scr_period"].split(' ')[:-1]:
+            if j != '':
+                courseDate.append(j)
         courseDate = ' '.join(courseDate)
-        courseTeacher = courseData[8].split(r'\":\"')[1].split(' ')[-1]
-        courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
-        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
-        courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
-        courseUrlSub = courseData[11].split(r'\":\"')[1].split(r'\"')[0]
-        courseUrlSrc = courseData[12].split(r'\":\"')[1].split(r'\"')[0]
+        courseTeacher = courseList[i]["scr_period"].split(' ')[-1]
+        courseSum = courseList[i]["scr_precnt"]
+        courseBlance = courseList[i]["scr_acptcnt"]
+        courseUrlCls = courseList[i]["cls_id"]
+        courseUrlSub = courseList[i]["sub_id"]
+        courseUrlSrc = courseList[i]["scr_dup"]
         courseIntroduceUrl = f"{courseUrlTitle + year + semester + courseUrlCls + courseUrlSub + courseUrlSrc}"
 
         result[count] = {
@@ -183,17 +186,16 @@ def courseListToDict(courseList):
     result = {}
     count = 0
     courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
-    for i in range(1, len(courseList)):
-        courseData = courseList[i].split(r'\",\"')
-        courseNumber = courseData[0]
-        courseName = courseData[2].split(r'\":\"')[1]
-        courseClass = courseData[7].split(r'\":\"')[1]
-        courseDate = courseData[8].split(r'\":\"')[1].split(' ')[0]
-        courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
-        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
-        courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
-        courseUrlSub = courseData[11].split(r'\":\"')[1].split(r'\"')[0]
-        courseUrlSrc = courseData[12].split(r'\":\"')[1].split(r'\"')[0]
+    for i in range(len(courseList)):
+        courseNumber = courseList[i]["scr_selcode"]
+        courseName = courseList[i]["sub_name"]
+        courseClass = courseList[i]["cls_name"]
+        courseDate = courseList[i]["scr_period"].split(' ')[0]
+        courseSum = courseList[i]["scr_precnt"]
+        courseBlance = courseList[i]["scr_acptcnt"]
+        courseUrlCls = courseList[i]["cls_id"]
+        courseUrlSub = courseList[i]["sub_id"]
+        courseUrlSrc = courseList[i]["scr_dup"]
         courseIntroduceUrl = f"{courseUrlTitle + year + semester + courseUrlCls + courseUrlSub + courseUrlSrc}"
 
         if courseBlance < courseSum:
@@ -214,21 +216,21 @@ def appCourseListToDict(courseList):
     result = []
     count = 0
     courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
-    for i in range(1, len(courseList)):
-        courseData = courseList[i].split(r'\",\"')
-        courseNumber = courseData[0]
-        courseName = courseData[2].split(r'\":\"')[1]
-        courseClass = courseData[7].split(r'\":\"')[1]
+    for i in range(len(courseList)):
+        courseNumber = courseList[i]["scr_selcode"]
+        courseName = courseList[i]["sub_name"]
+        courseClass = courseList[i]["cls_name"]
         courseDate = []
-        for i in courseData[8].split(r'\":\"')[1].split(' ')[:-1]:
-            if i != '':
-                courseDate.append(i)
+        for j in courseList[i]["scr_period"].split(' ')[:-1]:
+            if j != '':
+                courseDate.append(j)
         courseDate = ' '.join(courseDate)
-        courseSum = courseData[9].split(r'\":')[1].split(r',')[0][:-2]
-        courseBlance = courseData[9].split(r'\":')[2].split(r',')[0][:-2]
-        courseUrlCls = courseData[10].split(r'\":\"')[1].split(r'\"')[0]
-        courseUrlSub = courseData[11].split(r'\":\"')[1].split(r'\"')[0]
-        courseUrlSrc = courseData[12].split(r'\":\"')[1].split(r'\"')[0]
+        courseTeacher = courseList[i]["scr_period"].split(' ')[-1]
+        courseSum = courseList[i]["scr_precnt"]
+        courseBlance = courseList[i]["scr_acptcnt"]
+        courseUrlCls = courseList[i]["cls_id"]
+        courseUrlSub = courseList[i]["sub_id"]
+        courseUrlSrc = courseList[i]["scr_dup"]
         courseIntroduceUrl = f"{courseUrlTitle + year + semester + courseUrlCls + courseUrlSub + courseUrlSrc}"
 
         if courseBlance < courseSum:
@@ -238,6 +240,7 @@ def appCourseListToDict(courseList):
                 "courseName": courseName,
                 "courseClass": courseClass,
                 "courseDate": courseDate,
+                "courseTeacher": courseTeacher,
                 "courseBalance": courseBlance,
                 "courseSum": courseSum,
                 "courseIntroduceUrl": courseIntroduceUrl
