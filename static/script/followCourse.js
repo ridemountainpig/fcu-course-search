@@ -4,25 +4,31 @@ $(document).on('keypress', function (e) {
     }
 });
 
-function addFollowCourse() {
+function showLoading() {
     $('#coffeeIcon').addClass('w-full h-full');
     $('#coffeeBackground').addClass('w-full h-full');
     $('#coffeeIcon').removeClass('hidden');
     $('#coffeeBackground').removeClass('hidden');
+}
+
+function hideLoading() {
+    $('#coffeeIcon').removeClass('w-full h-full');
+    $('#coffeeBackground').removeClass('w-full h-full');
+    $('#coffeeIcon').addClass('hidden');
+    $('#coffeeBackground').addClass('hidden');
+}
+
+function addFollowCourse() {
+    showLoading();
     let courseNumber = $("#courseInput").val();
     $("#courseInput").val("");
     if (courseNumber == "") {
-        $('#coffeeIcon').removeClass('w-full h-full');
-        $('#coffeeBackground').removeClass('w-full h-full');
-        $('#coffeeIcon').addClass('hidden');
-        $('#coffeeBackground').addClass('hidden');
-
+        hideLoading();
         $('#courseNumError').text("請輸入課程號碼");
         $('#courseNumError').removeClass('-mr-28');
         setTimeout(function () {
             $('#courseNumError').addClass('-mr-28');
         }, 500);
-
         return;
     }
     $.ajax({
@@ -47,21 +53,14 @@ function addFollowCourse() {
                 setTimeout(function () {
                     $('#courseNumError').addClass('-mr-28');
                 }, 500);
-
-                $('#coffeeIcon').addClass('hidden');
-                $('#coffeeBackground').addClass('hidden');
-                $('#coffeeIcon').removeClass('w-full h-full');
-                $('#coffeeBackground').removeClass('w-full h-full');
+                hideLoading();
             }
         }
     })
 }
 
 function deleteFollowCourse(courseNumber) {
-    $('#coffeeIcon').addClass('w-full h-full');
-    $('#coffeeBackground').addClass('w-full h-full');
-    $('#coffeeIcon').removeClass('hidden');
-    $('#coffeeBackground').removeClass('hidden');
+    showLoading();
     let followList = localStorage.getItem("followList");
     followList = followList.split(",");
     followList.splice(followList.indexOf(courseNumber.toString()), 1);
@@ -73,10 +72,7 @@ function deleteFollowCourse(courseNumber) {
 }
 
 function generateCourseList() {
-    $('#coffeeIcon').addClass('w-full h-full');
-    $('#coffeeBackground').addClass('w-full h-full');
-    $('#coffeeIcon').removeClass('hidden');
-    $('#coffeeBackground').removeClass('hidden');
+    showLoading();
     let followList = localStorage.getItem("followList");
     if (followList == null) {
         followList = [];
@@ -133,10 +129,7 @@ function generateCourseList() {
                 }
 
                 setTimeout(function () {
-                    $('#coffeeIcon').removeClass('w-full h-full');
-                    $('#coffeeBackground').removeClass('w-full h-full');
-                    $('#coffeeIcon').addClass('hidden');
-                    $('#coffeeBackground').addClass('hidden');
+                    hideLoading();
                 }, 500);
             }
         })
@@ -152,10 +145,7 @@ function generateCourseList() {
         $('#courseList').html(courseHtml);
 
         setTimeout(function () {
-            $('#coffeeIcon').removeClass('w-full h-full');
-            $('#coffeeBackground').removeClass('w-full h-full');
-            $('#coffeeIcon').addClass('hidden');
-            $('#coffeeBackground').addClass('hidden');
+            hideLoading();
         }, 500);
     }
 }
