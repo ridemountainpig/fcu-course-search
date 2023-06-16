@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from script import courseSearch as cs
 from script import init
 import os
@@ -26,6 +26,12 @@ def generalstudies():
 @app.route('/searchcourse/<course>')
 def searchCourseByCode(course):
     return cs.searchCourseByCode(course)
+
+@app.route('/searchcourselist', methods=['POST'])
+def searchCourseList():
+    data = request.get_json()
+    courseList = data['followList']
+    return cs.searchCourseByCodeList(courseList)
 
 @app.route('/checkcourse/<course>')
 def checkCourse(course):

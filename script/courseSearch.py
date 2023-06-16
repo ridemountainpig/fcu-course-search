@@ -76,6 +76,17 @@ def searchCourseByCode(courseCode):
         return courseData
 
 
+def searchCourseByCodeList(courseList):
+    courseData = {}
+    for course in courseList:
+        if course == "":
+            continue
+        print(course)
+        data = searchCourseByCode(course)
+        courseData[len(courseData)] = data[0]
+    return courseData
+
+
 generalStudiesData = '''
     {
         "baseOptions": {
