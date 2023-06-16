@@ -21,7 +21,7 @@ function addFollowCourse() {
         $('#courseNumError').removeClass('-mr-28');
         setTimeout(function () {
             $('#courseNumError').addClass('-mr-28');
-        }, 3000);
+        }, 500);
 
         return;
     }
@@ -46,7 +46,7 @@ function addFollowCourse() {
                 $('#courseNumError').removeClass('-mr-28');
                 setTimeout(function () {
                     $('#courseNumError').addClass('-mr-28');
-                }, 3000);
+                }, 500);
 
                 $('#coffeeIcon').addClass('hidden');
                 $('#coffeeBackground').addClass('hidden');
@@ -122,10 +122,10 @@ function generateCourseList() {
                                     </div>
                                 </div>
                                 <div class="flex justify-center items-center text-orange-400 font-bold text-xl mt-2">
-                                    <div>${courseData[i].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
+                                    <div>${courseData[i].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[i].courseSum}</div>
                                 </div>
                                 <div class="flex justify-center">
-                                    <button class="p-3 m-3 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[0].courseNumber})">取消關注</button>
+                                    <button class="p-3 m-3 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[i].courseNumber})">取消關注</button>
                                 </div>
                             </div>
                         `;
