@@ -18,17 +18,28 @@ function hideLoading() {
     $('#coffeeBackground').addClass('hidden');
 }
 
+function showErrorMessage(message) {
+    $('#courseNumError').text(message);
+    $('#courseNumError').removeClass('-mr-28');
+    setTimeout(function () {
+        $('#courseNumError').addClass('-mr-28');
+    }, 2000);
+}
+
 function addFollowCourse() {
     showLoading();
     let courseNumber = $("#courseInput").val();
     $("#courseInput").val("");
     if (courseNumber == "") {
         hideLoading();
-        $('#courseNumError').text("請輸入課程號碼");
-        $('#courseNumError').removeClass('-mr-28');
-        setTimeout(function () {
-            $('#courseNumError').addClass('-mr-28');
-        }, 500);
+        showErrorMessage("請輸入課程號碼");
+        return;
+    }
+    let followList = localStorage.getItem("followList");
+    followList = followList.split(",");
+    if (followList.includes(`${courseNumber}`)) {
+        hideLoading();
+        showErrorMessage("已關注此課程");
         return;
     }
     $.ajax({
@@ -48,12 +59,8 @@ function addFollowCourse() {
                 localStorage.setItem("followList", followList);
                 generateCourseList();
             } else {
-                $('#courseNumError').text("課程號碼錯誤");
-                $('#courseNumError').removeClass('-mr-28');
-                setTimeout(function () {
-                    $('#courseNumError').addClass('-mr-28');
-                }, 500);
                 hideLoading();
+                showErrorMessage("課程號碼錯誤");
             }
         }
     })
