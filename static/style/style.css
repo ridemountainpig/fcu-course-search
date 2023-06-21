@@ -1,5 +1,5 @@
 .notification {
-    position: absolute;
+    position: fixed;
     width: 160px;
     padding: 20px;
     border-radius: 0.75rem;
@@ -14,6 +14,7 @@
     animation: fade-in 4s linear forwards;
     top: 80px;
     right: 96px;
+    z-index: 999;
 }
 
 @media (max-width: 1200px) {
