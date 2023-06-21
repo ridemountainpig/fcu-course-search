@@ -1,0 +1,60 @@
+.notification {
+    position: absolute;
+    width: 160px;
+    padding: 20px;
+    border-radius: 0.75rem;
+    background-color: #FFFFFF;
+    color: rgb(75, 85, 99);
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    animation: fade-in 4s linear forwards;
+    top: 80px;
+    right: 96px;
+}
+
+@media (max-width: 1200px) {
+    .notification {
+        display: flex;
+        justify-content: center;
+        padding: 12px 20px;
+        margin-right: calc(50% - 80px);
+        top: 16px;
+        right: 0px;
+    }
+}
+
+.notification_progress {
+    position: absolute;
+    left: 5px;
+    bottom: 0px;
+    width: calc(100% - 10px);
+    height: 3px;
+    transform: scalex(0);
+    transform-origin: left;
+    background-image: linear-gradient(to right, rgb(255, 224, 190), rgb(253 186 116));
+    border-radius: inherit;
+    animation: load 3s 0.25s linear forwards;
+}
+
+@keyframes fade-in {
+    5% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes load {
+    to {
+        transform: scalex(1);
+    }
+}

@@ -19,11 +19,13 @@ function hideLoading() {
 }
 
 function showErrorMessage(message) {
-    $('#courseNumError').text(message);
-    $('#courseNumError').removeClass('-mr-28');
-    setTimeout(function () {
-        $('#courseNumError').addClass('-mr-28');
-    }, 2000);
+    let errorHtml = `
+        <div class="notification">
+            <p>${message}</p>
+            <span class="notification_progress"></span>
+        </div>
+    `
+    $('#courseNumError').append(errorHtml);
 }
 
 function addFollowCourse() {

@@ -20,6 +20,7 @@
     <title>FCU COURSE</title>
     <link rel="icon" href="/static/images/FF.png" type="image/icon">
     <link rel="stylesheet" href="../static/style/output.css">
+    <link rel="stylesheet" href="../static/style/style.css">
 
     <style>
         .courseList {
@@ -35,6 +36,7 @@
 </head>
 
 <body class="h-screen bg-slate-100">
+    <div id="courseNumError"></div>
     <div class="flex items-center max-[1200px]:justify-center min-[1201px]:ml-24 max-[465px]:ml-10 h-44">
         <div class="w-96">
             <div class="cursor-pointer min-[1201px]:hidden">
@@ -92,7 +94,6 @@
                     <div class="h-3/5">
                         <div class="flex justify-between w-full overflow-hidden">
                             <div class="font-medium text-sm text-gray-400 py-2">請輸入課程號碼</div>
-                            <div id="courseNumError" class="font-medium text-sm text-red-300 py-2 -mr-28 duration-500"></div>
                         </div>
                         <div class="relative flex justify-center items-center">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

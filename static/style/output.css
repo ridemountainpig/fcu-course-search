@@ -554,6 +554,54 @@ video {
   right: 0px;
 }
 
+.top-12 {
+  top: 3rem;
+}
+
+.right-28 {
+  right: 7rem;
+}
+
+.right-24 {
+  right: 6rem;
+}
+
+.top-16 {
+  top: 4rem;
+}
+
+.right-10 {
+  right: 2.5rem;
+}
+
+.top-20 {
+  top: 5rem;
+}
+
+.top-24 {
+  top: 6rem;
+}
+
+.top-28 {
+  top: 7rem;
+}
+
+.top-10 {
+  top: 2.5rem;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.right-auto {
+  right: auto;
+}
+
+.right-1\/2 {
+  right: 50%;
+}
+
 .z-20 {
   z-index: 20;
 }
@@ -748,10 +796,6 @@ video {
   height: 2.5rem;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .w-96 {
   width: 24rem;
 }
@@ -780,10 +824,6 @@ video {
   width: 2.5rem;
 }
 
-.w-16 {
-  width: 4rem;
-}
-
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -791,6 +831,11 @@ video {
 
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-x-1\/2 {
+  --tw-translate-x: 50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1288,6 +1333,10 @@ video {
     display: none;
   }
 
+  .max-\[1200px\]\:w-full {
+    width: 100%;
+  }
+
   .max-\[1200px\]\:flex-col {
     flex-direction: column;
   }
@@ -1357,6 +1406,10 @@ video {
 }
 
 @media (max-width: 465px) {
+  .max-\[465px\]\:right-24 {
+    right: 6rem;
+  }
+
   .max-\[465px\]\:ml-10 {
     margin-left: 2.5rem;
   }
@@ -1365,6 +1418,12 @@ video {
 @media (max-width: 450px) {
   .max-\[450px\]\:flex-col {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 465px) {
+  .min-\[465px\]\:right-24 {
+    right: 6rem;
   }
 }
 
@@ -1457,6 +1516,18 @@ video {
 }
 
 @media (min-width: 1200px) {
+  .min-\[1200px\]\:absolute {
+    position: absolute;
+  }
+
+  .min-\[1200px\]\:right-24 {
+    right: 6rem;
+  }
+
+  .min-\[1200px\]\:top-20 {
+    top: 5rem;
+  }
+
   .min-\[1200px\]\:ml-24 {
     margin-left: 6rem;
   }
