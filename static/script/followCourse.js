@@ -113,20 +113,20 @@ function generateCourseList() {
                                 <div id="courseNumber" class="flex justify-center items-center p-5 m-3 text-gray-600 font-extrabold text-lg bg-slate-100 rounded-lg">
                                     ${courseData[i].courseNumber}
                                 </div>
-                                <div class="flex justify-start max-[1301px]:ml-5 min-[1301px]:w-64">
-                                    <div>
+                                <div class="flex justify-start max-[1301px]:justify-center max-[1301px]:text-center min-[1301px]:w-64">
+                                    <div class="mx-3">
                                         <div id="courseName" class="text-gray-600 font-bold min-[1301px]:text-lg text-base">
                                             ${courseData[i].courseName}
                                         </div>
-                                        <div id="courseTime" class="text-gray-400 font-medium min-[1301px]:text-sm text-xs">
+                                        <div id="courseTime" class="text-gray-400 font-medium mt-1 min-[1301px]:text-sm text-xs">
                                             ${courseData[i].courseDate}
                                         </div>
-                                        <div id="courseTime" class="text-gray-400 font-medium min-[1301px]:text-sm text-xs">
+                                        <div id="courseTime" class="text-gray-400 font-medium mt-1 min-[1301px]:text-sm text-xs">
                                             ${courseData[i].courseClass}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex justify-center items-center text-orange-400 font-bold text-xl mt-2">
+                                <div class="flex justify-center items-center text-orange-400 font-bold text-base min-[1301px]:text-xl mt-2">
                                     <div>${courseData[i].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[i].courseSum}</div>
                                 </div>
                                 <div class="flex justify-center">
