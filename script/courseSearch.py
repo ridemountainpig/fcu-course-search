@@ -201,7 +201,11 @@ def courseListToDict(courseList):
         courseNumber = courseList[i]["scr_selcode"]
         courseName = courseList[i]["sub_name"]
         courseClass = courseList[i]["cls_name"]
-        courseDate = courseList[i]["scr_period"].split(' ')[0]
+        courseDate = []
+        for j in courseList[i]["scr_period"].split(' ')[:-1]:
+            if j != '':
+                courseDate.append(j)
+        courseDate = ' '.join(courseDate)
         courseSum = courseList[i]["scr_precnt"]
         courseBlance = courseList[i]["scr_acptcnt"]
         courseUrlCls = courseList[i]["cls_id"]
