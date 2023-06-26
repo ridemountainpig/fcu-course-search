@@ -38,11 +38,13 @@ function addFollowCourse() {
         return;
     }
     let followList = localStorage.getItem("followList");
-    followList = followList.split(",");
-    if (followList.includes(`${courseNumber}`)) {
-        hideLoading();
-        showErrorMessage("已關注此課程");
-        return;
+    if (followList != null) {
+        followList = followList.split(",");
+        if (followList.includes(`${courseNumber}`)) {
+            hideLoading();
+            showErrorMessage("已關注此課程");
+            return;
+        }
     }
     $.ajax({
         url: "/checkcourse/" + courseNumber,
