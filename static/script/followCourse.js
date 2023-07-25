@@ -128,8 +128,18 @@ function generateCourseList() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex justify-center items-center text-orange-400 font-bold text-base min-[1301px]:text-xl mt-2">
-                                    <div>${courseData[i].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[i].courseSum}</div>
+                                <div class="flex justify-center max-[1301px]:w-full">
+                                    <div class="flex justify-center items-center text-orange-400 font-bold text-base min-[1301px]:text-xl min-[1301px]:w-26 w-20 w-fit mt-2">
+                                        <div class="flex justify-center w-1/3">
+                                            <div>${courseData[i].courseBalance}</div>
+                                        </div>
+                                        <div class="flex justify-center w-1/3">
+                                            <i class="bi bi-lightning-fill px-2"></i>
+                                        </div>
+                                        <div class="flex justify-center w-1/3">
+                                            <div>${courseData[i].courseSum}</div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="flex justify-center">
                                     <button class="p-3 m-3 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[i].courseNumber})">取消關注</button>

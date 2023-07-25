@@ -587,12 +587,17 @@ video {
   order: 0;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-3 {
   margin: 0.75rem;
 }
 
-.m-2 {
-  margin: 0.5rem;
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
 .mx-4 {
@@ -630,21 +635,12 @@ video {
   margin-bottom: auto;
 }
 
-.mx-3 {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
 .-ml-72 {
   margin-left: -18rem;
 }
 
 .-mr-14 {
   margin-right: -3.5rem;
-}
-
-.-mr-28 {
-  margin-right: -7rem;
 }
 
 .-mr-72 {
@@ -695,6 +691,10 @@ video {
   margin-right: 1.25rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -709,10 +709,6 @@ video {
 
 .mt-6 {
   margin-top: 1.5rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
 }
 
 .block {
@@ -803,20 +799,25 @@ video {
   width: 100%;
 }
 
-.w-60 {
-  width: 15rem;
+.w-1\/3 {
+  width: 33.333333%;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-36 {
+  width: 9rem;
 }
 
 .w-24 {
   width: 6rem;
 }
 
-.w-32 {
-  width: 8rem;
-}
-
-.w-72 {
-  width: 18rem;
+.w-26 {
+  width: 6.5rem;
 }
 
 .-translate-x-1\/2 {
@@ -1309,8 +1310,8 @@ video {
 }
 
 @media (max-width: 1301px) {
-  .max-\[1301px\]\:ml-5 {
-    margin-left: 1.25rem;
+  .max-\[1301px\]\:w-full {
+    width: 100%;
   }
 
   .max-\[1301px\]\:justify-center {
@@ -1347,16 +1348,16 @@ video {
 }
 
 @media (max-width: 930px) {
-  .max-\[930px\]\:ml-5 {
-    margin-left: 1.25rem;
-  }
-
   .max-\[930px\]\:flex {
     display: flex;
   }
 
   .max-\[930px\]\:hidden {
     display: none;
+  }
+
+  .max-\[930px\]\:w-full {
+    width: 100%;
   }
 
   .max-\[930px\]\:justify-center {
@@ -1474,8 +1475,8 @@ video {
     width: 18rem;
   }
 
-  .min-\[930px\]\:justify-center {
-    justify-content: center;
+  .min-\[930px\]\:w-26 {
+    width: 6.5rem;
   }
 
   .min-\[930px\]\:p-5 {
@@ -1558,6 +1559,26 @@ video {
 
   .min-\[1301px\]\:w-64 {
     width: 16rem;
+  }
+
+  .min-\[1301px\]\:w-20 {
+    width: 5rem;
+  }
+
+  .min-\[1301px\]\:w-24 {
+    width: 6rem;
+  }
+
+  .min-\[1301px\]\:w-26 {
+    width: 6.5rem;
+  }
+
+  .min-\[1301px\]\:w-32 {
+    width: 8rem;
+  }
+
+  .min-\[1301px\]\:w-36 {
+    width: 9rem;
   }
 
   .min-\[1301px\]\:text-lg {
