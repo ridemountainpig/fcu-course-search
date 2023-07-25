@@ -116,7 +116,7 @@ function generateCourseList() {
                                     ${courseData[i].courseNumber}
                                 </div>
                                 <div class="flex justify-start max-[1301px]:justify-center max-[1301px]:text-center min-[1301px]:w-64">
-                                    <div class="mx-3">
+                                    <div>
                                         <div id="courseName" class="text-gray-600 font-bold min-[1301px]:text-lg text-base">
                                             ${courseData[i].courseName}
                                         </div>
