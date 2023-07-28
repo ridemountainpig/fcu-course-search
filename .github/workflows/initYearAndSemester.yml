@@ -19,7 +19,7 @@ jobs:
       - name: Make a GET request to a URL
         id: init
         run: |
-          response=$(curl -s https://fcu-course-search.repl.co/initYearAndSemester)
+          response=$(curl -s https://fcu-course-search.zeabur.app/initYearAndSemester)
           semester=$(echo "$response" | jq -r '.semester')
           year=$(echo "$response" | jq -r '.year')
           echo "semester=$semester" >> $GITHUB_ENV
