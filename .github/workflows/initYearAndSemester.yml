@@ -23,8 +23,8 @@ jobs:
         id: init
         run: |
           response=$(curl -s https://fcu-course-search.zeabur.app/initYearAndSemester)
-          semester=""
-          year=""
+          semester=$(echo "$response" | jq -r '.semester')
+          year=$(echo "$response" | jq -r '.year')
           url=$(echo "$response" | jq -r '.url')
           if [ -z "$semester" ] && [ -z "$year" ]; then
             echo "Error: Missing semester and year. Exiting workflow."
