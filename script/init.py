@@ -27,7 +27,7 @@ def getSystemYear():
             print("Url", url)
             print("Year:", year)
             print("Semester:", semester)
-            return {"year": year, "semester": semester}
+            return {"url": url, "year": year, "semester": semester}
 
         except requests.exceptions.RequestException as e:
             # Handle request exceptions, such as connection errors or timeouts
