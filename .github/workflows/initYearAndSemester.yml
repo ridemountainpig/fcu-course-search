@@ -32,11 +32,13 @@ jobs:
           fi
           echo "semester=$semester" >> $GITHUB_ENV
           echo "year=$year" >> $GITHUB_ENV
+          echo "url=$url" >> $GITHUB_ENV
           
       - name: Print semester and year
         run: |
           echo "semester=${{ env.semester }}"
           echo "year=${{ env.year }}"
+          echo "url=${{ env.url }}"
           
       # - name: Set semester and year in script
       #   uses: actions/github-script@v4
