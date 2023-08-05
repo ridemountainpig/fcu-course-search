@@ -3,6 +3,7 @@ name: Init course system year and semester
 on:
   schedule:
     - cron: '0 */24 * * *'
+  workflow_dispatch:
 
 jobs:
   make-request:
@@ -22,6 +23,10 @@ jobs:
           response=$(curl -s https://fcu-course-search.zeabur.app/initYearAndSemester)
           semester=$(echo "$response" | jq -r '.semester')
           year=$(echo "$response" | jq -r '.year')
+          if [ -z "$semester" ] && [ -z "$year" ]; then
+            echo "Error: Missing semester and year. Exiting workflow."
+            exit 1
+          fi
           echo "semester=$semester" >> $GITHUB_ENV
           echo "year=$year" >> $GITHUB_ENV
           
