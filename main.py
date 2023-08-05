@@ -53,12 +53,6 @@ def getGeneralStudiesList():
     return cs.getAppGeneralCourseList()
 
 
-@app.route('/GITPULL')
-def gitPull():
-    os.system('git pull')
-    return "Git Pull Success"
-
-
 @app.route('/initYearAndSemester')
 def initYearAndSemester():
     return init.getSystemYear()
