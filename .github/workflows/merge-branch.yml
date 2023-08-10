@@ -2,7 +2,7 @@ name: Merge branch
 on:
   push:
     branches:
-      - merge-branch-dev
+      - main
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
@@ -13,6 +13,6 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          target_branch: merge-branch-test
-          message: Merge merge-branch-dev into merge-branch-test
+          target_branch: zeabur-deploy
+          message: Merge main into zeabur-deploy
           github_token: ${{ secrets.GITHUB_TOKEN }}
