@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Merge merge-branch-dev -> merge-branch-test
+      - name: Merge main -> zeabur-deploy
         uses: devmasx/merge-branch@master
         with:
           type: now
