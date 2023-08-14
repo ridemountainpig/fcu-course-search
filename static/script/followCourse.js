@@ -5,6 +5,7 @@ $(document).on('keypress', function (e) {
 });
 
 function showLoading() {
+    $('#coffeeBlock').removeClass('hidden');
     $('#coffeeIcon').addClass('w-full h-full');
     $('#coffeeBackground').addClass('w-full h-full');
     $('#coffeeIcon').removeClass('hidden');
@@ -12,6 +13,7 @@ function showLoading() {
 }
 
 function hideLoading() {
+    $('#coffeeBlock').addClass('hidden');
     $('#coffeeIcon').removeClass('w-full h-full');
     $('#coffeeBackground').removeClass('w-full h-full');
     $('#coffeeIcon').addClass('hidden');
@@ -129,7 +131,7 @@ function generateCourseList() {
                                     </div>
                                 </div>
                                 <div class="flex justify-center max-[1301px]:w-full">
-                                    <div class="flex justify-center items-center text-orange-400 font-bold text-base min-[1301px]:text-xl min-[1301px]:w-26 w-20 w-fit mt-2">
+                                    <div class="flex justify-center items-center text-orange-400 font-bold text-base min-[1301px]:text-xl min-[1301px]:w-26 w-fit mt-2">
                                         <div class="flex justify-center w-1/3">
                                             <div>${courseData[i].courseBalance}</div>
                                         </div>
