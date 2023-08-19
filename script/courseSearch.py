@@ -60,11 +60,14 @@ def searchCourseByCode(courseCode):
         }
     '''
 
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=data,
-        headers=header
-    )
+    for i in range(1, 5):
+        response = s.post(
+            f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
+            data=data,
+            headers=header
+        )
+        if response.status_code == 200:
+            break
 
     courseList = json.loads(response.text)
     courseList = json.loads(courseList['d'])
@@ -133,11 +136,14 @@ generalStudiesData = '''
 
 
 def getGeneralCourseList():
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=generalStudiesData,
-        headers=header
-    )
+    for i in range(1, 5):
+        response = s.post(
+            f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
+            data=generalStudiesData,
+            headers=header
+        )
+        if response.status_code == 200:
+            break
 
     courseList = json.loads(response.text)
     courseList = json.loads(courseList['d'])

@@ -11,7 +11,6 @@ $(document).ready(() => {
 });
 
 function getGeneralStudies(courseData) {
-
     if (Object.keys(courseData).length === 0) {
         let courseHtml = `
             <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600">通識課程皆已額滿</div>
