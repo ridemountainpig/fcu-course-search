@@ -1,7 +1,7 @@
-![B2AF4887-9795-448C-A4A6-218BA4D707F6_1_201_a](https://user-images.githubusercontent.com/92412722/215242776-ae0b4773-9e82-4588-8bd8-bbb458384a6a.jpeg)
+![CleanShot 2023-08-25 at 13 05 30@2x](https://github.com/ridemountainpig/fcu-course-search/assets/92412722/19689b2f-0e16-472d-9e8d-f37f5f924d30)
+
 
 # FCU Course Search
-[![Run on Repl.it](https://repl.it/badge/github/ridemountainpig/fcu-course-search?theme=light)](https://repl.it/github/ridemountainpig/fcu-course-search)
 
 A website where FCU students can check the balance and follow the progress of their courses.
 
