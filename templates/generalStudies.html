@@ -1,87 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+            gtag("config", "G-22QRKM1PH4");
+        </script>
 
-        gtag('config', 'G-22QRKM1PH4');
-    </script>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <title>FCU Course Search</title>
+        <link rel="icon" href="/static/images/FF.png" type="image/icon" />
+        <link rel="stylesheet" href="../static/style/output.css" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <title>FCU Course Search</title>
-    <link rel="icon" href="/static/images/FF.png" type="image/icon">
-    <link rel="stylesheet" href="../static/style/output.css">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://fcu-course-search.zeabur.app/generalstudies"
+        />
+        <meta property="og:title" content="FCU Course Search" />
+        <meta property="og:description" content="" />
+        <meta
+            property="og:image"
+            content="https://fcu-course-search.zeabur.app/static/images/FF.png"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fcu-course-search.zeabur.app/generalstudies">
-    <meta property="og:title" content="FCU Course Search">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="https://fcu-course-search.zeabur.app/static/images/FF.png">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://fcu-course-search.zeabur.app/generalstudies"
+        />
+        <meta property="twitter:title" content="FCU Course Search" />
+        <meta property="twitter:description" content="" />
+        <meta
+            property="twitter:image"
+            content="https://fcu-course-search.zeabur.app/static/images/FF.png"
+        />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fcu-course-search.zeabur.app/generalstudies">
-    <meta property="twitter:title" content="FCU Course Search">
-    <meta property="twitter:description" content="">
-    <meta property="twitter:image" content="https://fcu-course-search.zeabur.app/static/images/FF.png">
+        <style>
+            .courseList {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                overflow-y: scroll;
+            }
 
-    <style>
-        .courseList {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            overflow-y: scroll;
-        }
+            .courseList::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+    </head>
 
-        .courseList::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
-</head>
-
-<body class="h-screen bg-slate-100">
-    <div class="flex items-center max-[520px]:ml-4 min-[520px]:ml-24 h-44">
-        <div>
-            <div class="cursor-pointer min-[931px]:hidden">
-                <i class="bi bi-arrow-left-square text-gray-400 font-bold" style="font-size: 30px;"
-                    onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"></i>
-            </div>
-            <div class="flex font-bold text-4xl text-gray-600">
-                <div class="cursor-pointer max-[930px]:hidden">
-                    <i class="bi bi-arrow-left-square text-gray-400 font-bold pr-2" style="font-size: 30px;"
-                        onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"></i>
+    <body class="h-screen bg-slate-100">
+        <div class="flex items-center max-[520px]:ml-4 min-[520px]:ml-24 h-44">
+            <div>
+                <div class="cursor-pointer min-[931px]:hidden">
+                    <i
+                        class="bi bi-arrow-left-square text-gray-400 font-bold"
+                        style="font-size: 30px"
+                        onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"
+                    ></i>
                 </div>
-                General Studies
+                <div class="flex font-bold text-4xl text-gray-600">
+                    <div class="cursor-pointer max-[930px]:hidden">
+                        <i
+                            class="bi bi-arrow-left-square text-gray-400 font-bold pr-2"
+                            style="font-size: 30px"
+                            onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"
+                        ></i>
+                    </div>
+                    General Studies
+                </div>
+                <div
+                    class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
+                    style="width: 122px; letter-spacing: 10px"
+                >
+                    通識課程
+                </div>
             </div>
-            <div class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
-                style="width: 122px; letter-spacing: 10px;">通識課程</div>
         </div>
-    </div>
-    <div class="h-[calc(100vh_-_11rem)] relative">
-        <div id="courseList"
-            class="courseList mx-4 min-[520px]:mx-24 p-5 rounded-xl h-95% overflow-auto bg-backgroundGreen">
+        <div class="h-[calc(100vh_-_11rem)] relative">
+            <div
+                id="courseList"
+                class="courseList mx-4 min-[520px]:mx-24 p-5 rounded-xl h-95% overflow-auto bg-backgroundGreen"
+            ></div>
+            <div
+                class="absolute right-0 mb-2 mr-10 min-[520px]:mr-30 min-[520px]:mb-4 rounded-full bg-transparent text-orange-400 flex items-center justify-center hover:animate-bounce-y animate-fade-in"
+                style="bottom: 4%"
+                id="scrollToTopIcon"
+                onclick="scrollToTop()"
+            >
+                <i
+                    class="bi bi-arrow-up-circle-fill min-[930px]:text-5xl text-4.5xl"
+                ></i>
+            </div>
         </div>
-        <div class="absolute right-0 mb-2 mr-10 min-[520px]:mr-30 min-[520px]:mb-4 rounded-full bg-transparent text-orange-400 flex items-center justify-center hover:animate-bounce-y animate-fade-in"
-            style="bottom: 4%;"
-            id="scrollToTopIcon"
-            onclick="scrollToTop()">
-            <i class="bi bi-arrow-up-circle-fill min-[930px]:text-5xl text-4.5xl"></i>
-        </div>
-    </div>
-    <script src="/static/script/generalStudies.js"></script>
-    <script>
-        let courseData = {{ courseData| tojson | safe }};
-        getGeneralStudies(courseData);
-    </script>
-</body>
-
+        <script src="/static/script/generalStudies.js"></script>
+        <script>
+            let courseData = {{ courseData| tojson | safe }};
+            getGeneralStudies(courseData);
+        </script>
+    </body>
 </html>

@@ -1,114 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+            gtag("config", "G-22QRKM1PH4");
+        </script>
 
-        gtag('config', 'G-22QRKM1PH4');
-    </script>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <title>FCU Course Search</title>
+        <link rel="icon" href="/static/images/FF.png" type="image/icon" />
+        <link rel="stylesheet" href="../static/style/output.css" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <title>FCU Course Search</title>
-    <link rel="icon" href="/static/images/FF.png" type="image/icon">
-    <link rel="stylesheet" href="../static/style/output.css">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://fcu-course-search.zeabur.app/"
+        />
+        <meta property="og:title" content="FCU Course Search" />
+        <meta property="og:description" content="" />
+        <meta
+            property="og:image"
+            content="https://fcu-course-search.zeabur.app/static/images/FF.png"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fcu-course-search.zeabur.app/">
-    <meta property="og:title" content="FCU Course Search">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="https://fcu-course-search.zeabur.app/static/images/FF.png">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://fcu-course-search.zeabur.app/"
+        />
+        <meta property="twitter:title" content="FCU Course Search" />
+        <meta property="twitter:description" content="" />
+        <meta
+            property="twitter:image"
+            content="https://fcu-course-search.zeabur.app/static/images/FF.png"
+        />
+    </head>
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fcu-course-search.zeabur.app/">
-    <meta property="twitter:title" content="FCU Course Search">
-    <meta property="twitter:description" content="">
-    <meta property="twitter:image" content="https://fcu-course-search.zeabur.app/static/images/FF.png">
-</head>
-
-<body class="h-screen bg-slate-100">
-    <div class="h-36 flex justify-center items-center">
-        <div class="flex justify-center items-center w-full gap-x-6">
-            <img src="/static/images/FCU.png" alt="" class="hover:scale-75 duration-500" width="120px">
-            <div class="max-[450px]:flex-col flex gap-x-2">
-                <div class="font-bold tracking-wider text-4xl text-gray-600">Course</div>
-                <div class="font-bold tracking-wider text-4xl text-gray-600">Search</div>
+    <body class="h-screen bg-slate-100">
+        <div class="h-36 flex justify-center items-center">
+            <div class="flex justify-center items-center w-full gap-x-6">
+                <img
+                    src="/static/images/FCU.png"
+                    alt=""
+                    class="hover:scale-75 duration-500"
+                    width="120px"
+                />
+                <div class="max-[450px]:flex-col flex gap-x-2">
+                    <div
+                        class="font-bold tracking-wider text-4xl text-gray-600"
+                    >
+                        Course
+                    </div>
+                    <div
+                        class="font-bold tracking-wider text-4xl text-gray-600"
+                    >
+                        Search
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="min-[1100px]:h-4/6 flex justify-center items-center">
-        <div class="flex justify-center max-[1100px]:flex-col items-center">
-            <a href="/searchcourse" class="mx-8 my-4">
-                <div class="pt-10 w-80 bg-slate-200 rounded-lg drop-shadow-lg cursor-pointer hover:bg-lime-50 hover:-translate-y-1 hover:scale-110 duration-300"
-                    id="courseNumber">
-                    <div class="flex justify-center items-center my-8 p-5 bg-white">
-                        <i class="bi bi-search-heart" style=" font-size: 40px;" id="icon1"></i>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="pb-10">
-                            <span class="font-bold text-2xl text-gray-600">Course Number</span><br>
-                            <span class="flex justify-center mt-2 font-medium text-sm text-gray-400">課程號碼</span>
+        <div class="min-[1100px]:h-4/6 flex justify-center items-center">
+            <div class="flex justify-center max-[1100px]:flex-col items-center">
+                <a href="/searchcourse" class="mx-8 my-4">
+                    <div
+                        class="pt-10 w-80 bg-slate-200 rounded-lg drop-shadow-lg cursor-pointer hover:bg-lime-50 hover:-translate-y-1 hover:scale-110 duration-300"
+                        id="courseNumber"
+                    >
+                        <div
+                            class="flex justify-center items-center my-8 p-5 bg-white"
+                        >
+                            <i
+                                class="bi bi-search-heart"
+                                style="font-size: 40px"
+                                id="icon1"
+                            ></i>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="pb-10">
+                                <span class="font-bold text-2xl text-gray-600"
+                                    >Course Number</span
+                                ><br />
+                                <span
+                                    class="flex justify-center mt-2 font-medium text-sm text-gray-400"
+                                    >課程號碼</span
+                                >
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-            <a href="/generalstudies" class="mx-8 my-4">
-                <div
-                    class="pt-10 w-80 bg-slate-200 rounded-lg drop-shadow-lg cursor-pointer hover:bg-lime-50 hover:-translate-y-1 hover:scale-110 duration-300">
-                    <div class="flex justify-center items-center my-8 p-5 bg-white">
-                        <i class="bi bi-boxes" style=" font-size: 40px;"></i>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="pb-10">
-                            <span class="font-bold text-2xl text-gray-600">General Studies</span><br>
-                            <span class="flex justify-center mt-2 font-medium text-sm text-gray-400">通識課程</span>
+                </a>
+                <a href="/generalstudies" class="mx-8 my-4">
+                    <div
+                        class="pt-10 w-80 bg-slate-200 rounded-lg drop-shadow-lg cursor-pointer hover:bg-lime-50 hover:-translate-y-1 hover:scale-110 duration-300"
+                    >
+                        <div
+                            class="flex justify-center items-center my-8 p-5 bg-white"
+                        >
+                            <i class="bi bi-boxes" style="font-size: 40px"></i>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="pb-10">
+                                <span class="font-bold text-2xl text-gray-600"
+                                    >General Studies</span
+                                ><br />
+                                <span
+                                    class="flex justify-center mt-2 font-medium text-sm text-gray-400"
+                                    >通識課程</span
+                                >
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-            <a href="/followcourse" class="mx-8 my-4">
-                <div
-                    class="pt-10 w-80 bg-slate-200 rounded-lg drop-shadow-lg cursor-pointer hover:bg-lime-50 hover:-translate-y-1 hover:scale-110 duration-300">
-                    <div class="flex justify-center items-center my-8 p-5 bg-white">
-                        <i class="bi bi-journal-check" style=" font-size: 40px;"></i>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="pb-10">
-                            <span class="font-bold text-2xl text-gray-600">Follow Courses</span><br>
-                            <span class="flex justify-center mt-2 font-medium text-sm text-gray-400">關注課程</span>
+                </a>
+                <a href="/followcourse" class="mx-8 my-4">
+                    <div
+                        class="pt-10 w-80 bg-slate-200 rounded-lg drop-shadow-lg cursor-pointer hover:bg-lime-50 hover:-translate-y-1 hover:scale-110 duration-300"
+                    >
+                        <div
+                            class="flex justify-center items-center my-8 p-5 bg-white"
+                        >
+                            <i
+                                class="bi bi-journal-check"
+                                style="font-size: 40px"
+                            ></i>
+                        </div>
+                        <div class="flex justify-center">
+                            <div class="pb-10">
+                                <span class="font-bold text-2xl text-gray-600"
+                                    >Follow Courses</span
+                                ><br />
+                                <span
+                                    class="flex justify-center mt-2 font-medium text-sm text-gray-400"
+                                    >關注課程</span
+                                >
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="flex justify-center items-center" style="height: 12%;">
-        <div class="min-[1100px]:flex items-end justify-center p-4 text-gray-400">
-            <div class="p-2 flex justify-center">
-                <a href="https://github.com/ridemountainpig" class="p-2">
-                    <i class="bi bi-battery-full text-green-500"></i> Power By ridemountainpig
                 </a>
             </div>
-            <div class="p-2 flex justify-center max-[1301px]:justify-center">
-                <a href="https://github.com/ridemountainpig/fcu-course-search" class="p-2 bg-white rounded-lg">
-                    <span>
-                        <i class="bi bi-github"></i>
-                        Star Project
-                    </span>
-                </a>
+        </div>
+        <div class="flex justify-center items-center" style="height: 12%">
+            <div
+                class="min-[1100px]:flex items-end justify-center p-4 text-gray-400"
+            >
+                <div class="p-2 flex justify-center">
+                    <a href="https://github.com/ridemountainpig" class="p-2">
+                        <i class="bi bi-battery-full text-green-500"></i> Power
+                        By ridemountainpig
+                    </a>
+                </div>
+                <div
+                    class="p-2 flex justify-center max-[1301px]:justify-center"
+                >
+                    <a
+                        href="https://github.com/ridemountainpig/fcu-course-search"
+                        class="p-2 bg-white rounded-lg"
+                    >
+                        <span>
+                            <i class="bi bi-github"></i>
+                            Star Project
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>

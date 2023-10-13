@@ -1,11 +1,11 @@
 $(document).ready(() => {
-    const courseList = document.querySelector('#courseList');
-    $('#scrollToTopIcon').addClass('hidden');
-    courseList.addEventListener('scroll', () => {
+    const courseList = document.querySelector("#courseList");
+    $("#scrollToTopIcon").addClass("hidden");
+    courseList.addEventListener("scroll", () => {
         if (courseList.scrollTop < 100) {
-            $('#scrollToTopIcon').addClass('hidden');
+            $("#scrollToTopIcon").addClass("hidden");
         } else {
-            $('#scrollToTopIcon').removeClass('hidden');
+            $("#scrollToTopIcon").removeClass("hidden");
         }
     });
 });
@@ -15,8 +15,8 @@ function getGeneralStudies(courseData) {
         let courseHtml = `
             <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600">通識課程皆已額滿</div>
             <i class="bi bi-emoji-frown flex justify-center text-gray-600" style="margin-top: 10%; font-size: 80px;"></i>
-        `
-        $('#courseList').html(courseHtml);
+        `;
+        $("#courseList").html(courseHtml);
         return;
     }
 
@@ -59,10 +59,9 @@ function getGeneralStudies(courseData) {
         `;
         $("#courseList").append(courseHtml);
     }
-
 }
 
 function scrollToTop() {
-    const courseList = document.querySelector('#courseList');
-    courseList.scrollTo({ top: 0, behavior: 'smooth' });
+    const courseList = document.querySelector("#courseList");
+    courseList.scrollTo({ top: 0, behavior: "smooth" });
 }

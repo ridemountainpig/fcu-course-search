@@ -1,24 +1,24 @@
-$(document).on('keypress',function(e) {
-    if(e.which == 13) {
+$(document).on("keypress", function (e) {
+    if (e.which == 13) {
         searchCourse();
     }
 });
 
 function searchCourse() {
-    let courseNumber = $('#courseInput').val();
+    let courseNumber = $("#courseInput").val();
 
     if (courseNumber == "") {
-        return
+        return;
     }
 
-    $('#searchInput').addClass('hidden');
-    $('#courseListBox').removeClass('hidden');
-    $('#courseInput').val("");
+    $("#searchInput").addClass("hidden");
+    $("#courseListBox").removeClass("hidden");
+    $("#courseInput").val("");
 
     $.ajax({
         url: "/searchcourse/" + courseNumber,
         success: function (res) {
-            if (res != 'false') {
+            if (res != "false") {
                 let courseData = res;
                 let courseHtml = `
                         <div class="items-center justify-around py-6 px-10 -mt-20 bg-white rounded-xl shadow-2xl">
@@ -56,7 +56,7 @@ function searchCourse() {
                             </div>
                         </div>
                     `;
-                $('#courseList').append(courseHtml);
+                $("#courseList").append(courseHtml);
             } else {
                 let courseHtml = `
                         <div class="items-center justify-around py-6 px-10 -mt-20 bg-white rounded-xl shadow-2xl">
@@ -79,15 +79,14 @@ function searchCourse() {
                             </div>
                         </div>
                     `;
-                $('#courseList').append(courseHtml);
+                $("#courseList").append(courseHtml);
             }
-        }
-    })
-
+        },
+    });
 }
 
 function resetSearchCourse() {
-    $('#searchInput').removeClass('hidden');
-    $('#courseListBox').addClass('hidden');
-    $('#courseList').empty();
+    $("#searchInput").removeClass("hidden");
+    $("#courseListBox").addClass("hidden");
+    $("#courseList").empty();
 }

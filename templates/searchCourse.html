@@ -1,90 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+            gtag("config", "G-22QRKM1PH4");
+        </script>
 
-        gtag('config', 'G-22QRKM1PH4');
-    </script>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <title>FCU Course Search</title>
+        <link rel="icon" href="/static/images/FF.png" type="image/icon" />
+        <link rel="stylesheet" href="../static/style/output.css" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <title>FCU Course Search</title>
-    <link rel="icon" href="/static/images/FF.png" type="image/icon">
-    <link rel="stylesheet" href="../static/style/output.css">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://fcu-course-search.zeabur.app/searchcourse"
+        />
+        <meta property="og:title" content="FCU Course Search" />
+        <meta property="og:description" content="" />
+        <meta
+            property="og:image"
+            content="https://fcu-course-search.zeabur.app/static/images/FF.png"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fcu-course-search.zeabur.app/searchcourse">
-    <meta property="og:title" content="FCU Course Search">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="https://fcu-course-search.zeabur.app/static/images/FF.png">
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://fcu-course-search.zeabur.app/searchcourse"
+        />
+        <meta property="twitter:title" content="FCU Course Search" />
+        <meta property="twitter:description" content="" />
+        <meta
+            property="twitter:image"
+            content="https://fcu-course-search.zeabur.app/static/images/FF.png"
+        />
+    </head>
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fcu-course-search.zeabur.app/searchcourse">
-    <meta property="twitter:title" content="FCU Course Search">
-    <meta property="twitter:description" content="">
-    <meta property="twitter:image" content="https://fcu-course-search.zeabur.app/static/images/FF.png">
-</head>
-
-<body class="h-screen bg-slate-100">
-    <div class="flex items-center max-[520px]:ml-8 min-[520px]:ml-24 h-44">
-        <div>
-            <div class="cursor-pointer min-[650px]:hidden">
-                <i class="bi bi-arrow-left-square text-gray-400 font-bold" style="font-size: 30px;"
-                    onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"></i>
-            </div>
-            <div class="flex font-bold text-4xl text-gray-600">
-                <div class="cursor-pointer max-[651px]:hidden">
-                    <i class="bi bi-arrow-left-square text-gray-400 font-bold pr-2" style="font-size: 30px;"
-                        onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"></i>
+    <body class="h-screen bg-slate-100">
+        <div class="flex items-center max-[520px]:ml-8 min-[520px]:ml-24 h-44">
+            <div>
+                <div class="cursor-pointer min-[650px]:hidden">
+                    <i
+                        class="bi bi-arrow-left-square text-gray-400 font-bold"
+                        style="font-size: 30px"
+                        onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"
+                    ></i>
                 </div>
-                Course Number
-            </div>
-            <div class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
-                style="width: 122px; letter-spacing: 10px;">課程號碼</div>
-        </div>
-    </div>
-
-    <div class="flex justify-center items-start h-[calc(100vh_-_11rem)] w-full">
-        <div id="searchBox" class="h-full">
-            <div id="searchInput" class="w-full h-full flex justify-center items-center -mt-20">
-                <div class="relative">
-                    <div class="absolute -z-10 top-0 left-0 -mt-40 -ml-72 hidden h-96 w-96 rounded-full bg-gradient-to-r from-gradient3 to-gradient4 opacity-40 blur-3xl min-[700px]:block"></div>
-                    <div class="absolute -z-10 button-0 right-0 -mt-10 -mr-72 hidden h-96 w-96 rounded-full bg-gradient-to-l from-gradient1 to-gradient2 opacity-40 blur-3xl min-[700px]:block"></div>
-                    <div class="flex justify-center">
-                        <div class="font-medium text-xl text-gray-400 py-2">請輸入課程號碼</div>
+                <div class="flex font-bold text-4xl text-gray-600">
+                    <div class="cursor-pointer max-[651px]:hidden">
+                        <i
+                            class="bi bi-arrow-left-square text-gray-400 font-bold pr-2"
+                            style="font-size: 30px"
+                            onclick="window.location.href = 'https://fcu-course-search.zeabur.app/'"
+                        ></i>
                     </div>
-                    <div class="min-[700px]:flex max-[700px]:flex-col justify-center px-5">
-                        <input id="courseInput"
-                            class="block max-[700px]:mx-auto max-[700px]:w-full max-[700px]:rounded-lg max-[700px]:border-8 
-                                p-4 px-10 w-100 text-base max-[700px]:text-center text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 
-                                border-t-8 border-b-8 border-l-8 border-white z-10 focus:outline-none"
-                            placeholder="Course Number">
-                        <button
-                            class="block text-gray-400 bg-orange-100 font-medium max-[700px]:mx-auto max-[700px]:rounded-lg max-[700px]:border-8 max-[700px]:mt-2 
-                                rounded-tr-lg rounded-br-lg text-lg p-4 border-t-8 border-b-8 border-r-8 border-white"
-                            onclick="searchCourse()">查詢課程</button>
-                    </div>
+                    Course Number
                 </div>
-            </div>
-            <div id="courseListBox" class="hidden h-full my-auto">
-                <div class="flex justify-center items-center h-full px-2">
-                    <div id="courseList"></div>
+                <div
+                    class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
+                    style="width: 122px; letter-spacing: 10px"
+                >
+                    課程號碼
                 </div>
             </div>
         </div>
-    </div>
-    <script src="../static/script/searchCourse.js"></script>
-</body>
 
+        <div
+            class="flex justify-center items-start h-[calc(100vh_-_11rem)] w-full"
+        >
+            <div id="searchBox" class="h-full">
+                <div
+                    id="searchInput"
+                    class="w-full h-full flex justify-center items-center -mt-20"
+                >
+                    <div class="relative">
+                        <div
+                            class="absolute -z-10 top-0 left-0 -mt-40 -ml-72 hidden h-96 w-96 rounded-full bg-gradient-to-r from-gradient3 to-gradient4 opacity-40 blur-3xl min-[700px]:block"
+                        ></div>
+                        <div
+                            class="absolute -z-10 button-0 right-0 -mt-10 -mr-72 hidden h-96 w-96 rounded-full bg-gradient-to-l from-gradient1 to-gradient2 opacity-40 blur-3xl min-[700px]:block"
+                        ></div>
+                        <div class="flex justify-center">
+                            <div class="font-medium text-xl text-gray-400 py-2">
+                                請輸入課程號碼
+                            </div>
+                        </div>
+                        <div
+                            class="min-[700px]:flex max-[700px]:flex-col justify-center px-5"
+                        >
+                            <input
+                                id="courseInput"
+                                class="block max-[700px]:mx-auto max-[700px]:w-full max-[700px]:rounded-lg max-[700px]:border-8 p-4 px-10 w-100 text-base max-[700px]:text-center text-gray-400 font-bold rounded-tl-lg rounded-bl-lg bg-slate-100 border-t-8 border-b-8 border-l-8 border-white z-10 focus:outline-none"
+                                placeholder="Course Number"
+                            />
+                            <button
+                                class="block text-gray-400 bg-orange-100 font-medium max-[700px]:mx-auto max-[700px]:rounded-lg max-[700px]:border-8 max-[700px]:mt-2 rounded-tr-lg rounded-br-lg text-lg p-4 border-t-8 border-b-8 border-r-8 border-white"
+                                onclick="searchCourse()"
+                            >
+                                查詢課程
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="courseListBox" class="hidden h-full my-auto">
+                    <div class="flex justify-center items-center h-full px-2">
+                        <div id="courseList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../static/script/searchCourse.js"></script>
+    </body>
 </html>

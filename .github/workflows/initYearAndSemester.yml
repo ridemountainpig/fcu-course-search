@@ -1,75 +1,75 @@
 name: Init course system year and semester
 
 on:
-  schedule:
-    - cron: '0 */24 * * *'
-  workflow_dispatch:
+    schedule:
+        - cron: "0 */24 * * *"
+    workflow_dispatch:
 
 jobs:
-  make-request:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-        
-      - name: Make a GET request to a URL
-        id: init
-        run: |
-          response=$(curl -s https://fcu-course-search.zeabur.app/initYearAndSemester)
-          semester=$(echo "$response" | jq -r '.semester')
-          year=$(echo "$response" | jq -r '.year')
-          url=$(echo "$response" | jq -r '.url')
-          if [ -z "$semester" ] && [ -z "$year" ]; then
-            echo "Error: Missing semester and year. Exiting workflow."
-            exit 1
-          fi
-          echo "semester=$semester" >> $GITHUB_ENV
-          echo "year=$year" >> $GITHUB_ENV
-          echo "url=$url" >> $GITHUB_ENV
-          
-      - name: Print semester and year
-        run: |
-          echo "semester=${{ env.semester }}"
-          echo "year=${{ env.year }}"
-          echo "url=${{ env.url }}"
-          
-      - name: Set semester and year in script
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const fs = require('fs');
-            const filePath = '${{ github.workspace }}/script/courseSearch.py';
-            let fileContent = fs.readFileSync(filePath, 'utf8');
-            fileContent = fileContent.replace(/semester = '.+'/g, `semester = '${{ env.semester }}'`);
-            fileContent = fileContent.replace(/year = '.+'/g, `year = '${{ env.year }}'`);
-            fs.writeFileSync(filePath, fileContent);
-            
-      - name: Print updated file contents
-        run: |
-          cat script/courseSearch.py
-          
-      - name: Configure git
-        run: |
-          git config --global user.name "ridemountainpig"
-          git config --global user.email "lin0905580802@gmail.com"
-          
-      - name: Commit and push changes
-        run: |
-          if git diff-index --quiet HEAD --; then
-            echo "No changes detected."
-          else
-            git add .
-            git commit -m "update: update course year and semester"
-          fi
-        continue-on-error: true
-          
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    make-request:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "16.x"
+
+            - name: Make a GET request to a URL
+              id: init
+              run: |
+                  response=$(curl -s https://fcu-course-search.zeabur.app/initYearAndSemester)
+                  semester=$(echo "$response" | jq -r '.semester')
+                  year=$(echo "$response" | jq -r '.year')
+                  url=$(echo "$response" | jq -r '.url')
+                  if [ -z "$semester" ] && [ -z "$year" ]; then
+                    echo "Error: Missing semester and year. Exiting workflow."
+                    exit 1
+                  fi
+                  echo "semester=$semester" >> $GITHUB_ENV
+                  echo "year=$year" >> $GITHUB_ENV
+                  echo "url=$url" >> $GITHUB_ENV
+
+            - name: Print semester and year
+              run: |
+                  echo "semester=${{ env.semester }}"
+                  echo "year=${{ env.year }}"
+                  echo "url=${{ env.url }}"
+
+            - name: Set semester and year in script
+              uses: actions/github-script@v4
+              with:
+                  script: |
+                      const fs = require('fs');
+                      const filePath = '${{ github.workspace }}/script/courseSearch.py';
+                      let fileContent = fs.readFileSync(filePath, 'utf8');
+                      fileContent = fileContent.replace(/semester = '.+'/g, `semester = '${{ env.semester }}'`);
+                      fileContent = fileContent.replace(/year = '.+'/g, `year = '${{ env.year }}'`);
+                      fs.writeFileSync(filePath, fileContent);
+
+            - name: Print updated file contents
+              run: |
+                  cat script/courseSearch.py
+
+            - name: Configure git
+              run: |
+                  git config --global user.name "ridemountainpig"
+                  git config --global user.email "lin0905580802@gmail.com"
+
+            - name: Commit and push changes
+              run: |
+                  if git diff-index --quiet HEAD --; then
+                    echo "No changes detected."
+                  else
+                    git add .
+                    git commit -m "update: update course year and semester"
+                  fi
+              continue-on-error: true
+
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              with:
+                  branch: main
+                  github_token: ${{ secrets.GITHUB_TOKEN }}

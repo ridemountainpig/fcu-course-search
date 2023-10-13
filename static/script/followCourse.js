@@ -1,23 +1,23 @@
-$(document).on('keypress', function (e) {
+$(document).on("keypress", function (e) {
     if (e.which == 13) {
         addFollowCourse();
     }
 });
 
 function showLoading() {
-    $('#coffeeBlock').removeClass('hidden');
-    $('#coffeeIcon').addClass('w-full h-full');
-    $('#coffeeBackground').addClass('w-full h-full');
-    $('#coffeeIcon').removeClass('hidden');
-    $('#coffeeBackground').removeClass('hidden');
+    $("#coffeeBlock").removeClass("hidden");
+    $("#coffeeIcon").addClass("w-full h-full");
+    $("#coffeeBackground").addClass("w-full h-full");
+    $("#coffeeIcon").removeClass("hidden");
+    $("#coffeeBackground").removeClass("hidden");
 }
 
 function hideLoading() {
-    $('#coffeeBlock').addClass('hidden');
-    $('#coffeeIcon').removeClass('w-full h-full');
-    $('#coffeeBackground').removeClass('w-full h-full');
-    $('#coffeeIcon').addClass('hidden');
-    $('#coffeeBackground').addClass('hidden');
+    $("#coffeeBlock").addClass("hidden");
+    $("#coffeeIcon").removeClass("w-full h-full");
+    $("#coffeeBackground").removeClass("w-full h-full");
+    $("#coffeeIcon").addClass("hidden");
+    $("#coffeeBackground").addClass("hidden");
 }
 
 function showErrorMessage(message) {
@@ -26,8 +26,8 @@ function showErrorMessage(message) {
             <p>${message}</p>
             <span class="notification_progress"></span>
         </div>
-    `
-    $('#courseNumError').append(errorHtml);
+    `;
+    $("#courseNumError").append(errorHtml);
 }
 
 function addFollowCourse() {
@@ -68,8 +68,8 @@ function addFollowCourse() {
                 hideLoading();
                 showErrorMessage("課程號碼錯誤");
             }
-        }
-    })
+        },
+    });
 }
 
 function deleteFollowCourse(courseNumber) {
@@ -91,17 +91,17 @@ function generateCourseList() {
         followList = [];
     }
     if (followList.length != 0) {
-        $('#courseList').empty();
-        $('#followNumber').empty();
+        $("#courseList").empty();
+        $("#followNumber").empty();
         followList = followList.split(",");
-        if (followList.includes('')) {
-            $('#followNumber').append(followList.length - 1);
+        if (followList.includes("")) {
+            $("#followNumber").append(followList.length - 1);
         } else {
-            $('#followNumber').append(followList.length);
+            $("#followNumber").append(followList.length);
         }
 
         var data = {
-            followList: followList
+            followList: followList,
         };
 
         $.ajax({
@@ -154,18 +154,18 @@ function generateCourseList() {
                 setTimeout(function () {
                     hideLoading();
                 }, 500);
-            }
-        })
+            },
+        });
     } else {
         let courseHtml = `
             <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600">
                 尚未關注課程
             </div>
             <i class="bi bi-emoji-smile flex justify-center text-gray-600" style="margin-top: 10%; font-size: 80px;"></i>
-        `
-        $('#followNumber').empty();
-        $('#followNumber').append(0);
-        $('#courseList').html(courseHtml);
+        `;
+        $("#followNumber").empty();
+        $("#followNumber").append(0);
+        $("#courseList").html(courseHtml);
 
         setTimeout(function () {
             hideLoading();

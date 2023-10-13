@@ -3,7 +3,7 @@
     width: 160px;
     padding: 20px;
     border-radius: 0.75rem;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: rgb(75, 85, 99);
     font-weight: 500;
     text-align: center;
@@ -36,7 +36,11 @@
     height: 3px;
     transform: scalex(0);
     transform-origin: left;
-    background-image: linear-gradient(to right, rgb(255, 224, 190), rgb(253 186 116));
+    background-image: linear-gradient(
+        to right,
+        rgb(255, 224, 190),
+        rgb(253 186 116)
+    );
     border-radius: inherit;
     animation: load 3s 0.25s linear forwards;
 }

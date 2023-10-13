@@ -1,6 +1,5 @@
 ![CleanShot 2023-08-25 at 13 05 30@2x](https://github.com/ridemountainpig/fcu-course-search/assets/92412722/19689b2f-0e16-472d-9e8d-f37f5f924d30)
 
-
 # FCU Course Search
 
 A website where FCU students can check the balance and follow the progress of their courses.
@@ -9,10 +8,10 @@ Retrieve course information from the [Feng Chia University Course Search System]
 
 ## Technologies
 
-- Python
-- Flask
-- Requests
-- Tailwind CSS
+-   Python
+-   Flask
+-   Requests
+-   Tailwind CSS
 
 ## Setup Project
 

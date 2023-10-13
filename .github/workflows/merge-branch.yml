@@ -1,18 +1,18 @@
 name: Merge branch
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 jobs:
-  merge-branch:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
+    merge-branch:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
 
-      - name: Merge main -> zeabur-deploy
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          target_branch: zeabur-deploy
-          message: Merge main into zeabur-deploy
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Merge main -> zeabur-deploy
+              uses: devmasx/merge-branch@master
+              with:
+                  type: now
+                  target_branch: zeabur-deploy
+                  message: Merge main into zeabur-deploy
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
