@@ -58,5 +58,10 @@ def initYearAndSemester():
     return init.getSystemYear()
 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return app.send_static_file('assets/sitemap.xml')
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=81))
