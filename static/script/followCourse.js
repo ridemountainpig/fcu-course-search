@@ -112,6 +112,10 @@ function generateCourseList() {
 
             success: function (courseData) {
                 for (let i = Object.keys(courseData).length - 1; i >= 0; i--) {
+                    if (courseData[i] == "false") {
+                        deleteFollowCourse(followList[i]);
+                        break;
+                    }
                     let courseHtml = `
                             <div class="min-[1301px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
                                 <div id="courseNumber" class="flex justify-center items-center p-5 m-3 text-gray-600 font-extrabold text-lg bg-slate-100 rounded-lg">

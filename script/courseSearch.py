@@ -84,9 +84,11 @@ def searchCourseByCodeList(courseList):
     for course in courseList:
         if course == "":
             continue
-        print(course)
         data = searchCourseByCode(course)
-        courseData[len(courseData)] = data[0]
+        if data == "false":
+            courseData[len(courseData)] = "false"
+        else:
+            courseData[len(courseData)] = data[0]
     return courseData
 
 
