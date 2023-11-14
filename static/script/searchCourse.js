@@ -21,7 +21,7 @@ function searchCourse() {
             if (res != "false") {
                 let courseData = res;
                 let courseHtml = `
-                        <div class="items-center justify-around py-6 px-10 -mt-20 bg-white rounded-xl shadow-2xl">
+                        <div class="items-center justify-around py-6 px-10 bg-white rounded-xl shadow-2xl">
                             <div>
                                 <div id="courseNumber" class="flex justify-center items-center p-5 m-3 -mt-14 text-gray-600 font-extrabold text-lg bg-backgroundGreen rounded-lg">
                                 ${courseData[0].courseNumber}
