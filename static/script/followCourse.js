@@ -30,6 +30,25 @@ function showErrorMessage(message) {
     $("#courseNumError").append(errorHtml);
 }
 
+// init local storage followList when year or semester change
+async function initFollowCourse() {
+    const yearSemester = await fetch("/initYearAndSemester")
+        .then(response => {
+            return response.json();
+        })
+
+    if (localStorage.getItem("year-semester") == null) {
+        localStorage.setItem("year-semester", yearSemester["year"] + "-" + yearSemester["semester"]);
+    } else {
+        if (localStorage.getItem("year-semester") != yearSemester["year"] + "-" + yearSemester["semester"]) {
+            localStorage.setItem("year-semester", yearSemester["year"] + "-" + yearSemester["semester"]);
+            localStorage.setItem("followList", []);
+        }
+    }
+
+    generateCourseList();
+}
+
 function addFollowCourse() {
     showLoading();
     let courseNumber = $("#courseInput").val();
