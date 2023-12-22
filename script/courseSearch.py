@@ -5,7 +5,7 @@ s = requests.Session()
 
 # system year
 year = '112'
-semester = '1'
+semester = '2'
 
 header = {
     "Content-Type":
