@@ -39,6 +39,7 @@ async function initFollowCourse() {
 
     if (localStorage.getItem("year-semester") == null) {
         localStorage.setItem("year-semester", yearSemester["year"] + "-" + yearSemester["semester"]);
+        localStorage.setItem("followList", []);
     } else {
         if (localStorage.getItem("year-semester") != yearSemester["year"] + "-" + yearSemester["semester"]) {
             localStorage.setItem("year-semester", yearSemester["year"] + "-" + yearSemester["semester"]);
