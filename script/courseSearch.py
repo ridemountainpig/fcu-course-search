@@ -96,8 +96,8 @@ generalStudiesData = '''
     {
         "baseOptions": {
             "lang": "cht",
-            "year": 112,
-            "sms": 1
+            "year": ''' + year + ''',
+            "sms": ''' + semester + '''
         },
         "typeOptions": {
             "code": {
