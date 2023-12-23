@@ -4,8 +4,8 @@ import json
 s = requests.Session()
 
 # system year
-year = '112'
-semester = '2'
+year = 'null'
+semester = 'null'
 
 header = {
     "Content-Type":
