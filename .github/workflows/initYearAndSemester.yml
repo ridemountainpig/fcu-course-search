@@ -43,20 +43,21 @@ jobs:
               with:
                   script: |
                       const fs = require('fs');
-                      const filePath = '${{ github.workspace }}/script/courseSearch.py';
-                      let fileContent = fs.readFileSync(filePath, 'utf8');
-                      fileContent = fileContent.replace(/semester = '.+'/g, `semester = '${{ env.semester }}'`);
-                      fileContent = fileContent.replace(/year = '.+'/g, `year = '${{ env.year }}'`);
+                      const filePath = '${{ github.workspace }}/.env';
+                      let fileContent = "
+                      YEAR=${{ env.year }}
+                      SEMESTER=${{ env.semester }}
+                      "
                       fs.writeFileSync(filePath, fileContent);
 
             - name: Print updated file contents
               run: |
-                  cat script/courseSearch.py
+                  cat .env
 
             - name: Configure git
               run: |
-                  git config --global user.name "ridemountainpig"
-                  git config --global user.email "lin0905580802@gmail.com"
+                  git config --global user.name github-actions
+                  git config --global user.email github-actions[bot]@users.noreply.github.com
 
             - name: Commit and push changes
               run: |
@@ -64,7 +65,7 @@ jobs:
                     echo "No changes detected."
                   else
                     git add .
-                    git commit -m "update: update course year and semester"
+                    git commit -m "chore: update course year and semester"
                   fi
               continue-on-error: true
 

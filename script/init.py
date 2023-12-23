@@ -19,8 +19,7 @@ def getSystemYear():
             response = s.post(url, data=data, headers=header)
             response.raise_for_status()
 
-            initData = response.text.replace("\\", "")
-            initData = initData[6:-2]
+            initData = response.text
             initData = json.loads(initData)
             year = initData["defaultYearSms"]["year"]
             semester = initData["defaultYearSms"]["sms"]

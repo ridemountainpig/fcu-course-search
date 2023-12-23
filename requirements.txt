@@ -1,2 +1,4 @@
 flask
 requests
+os
+dotenv

@@ -1,11 +1,15 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 s = requests.Session()
 
 # system year
-year = 'null'
-semester = 'null'
+year = os.getenv('YEAR')
+semester = os.getenv('SEMESTER')
 
 header = {
     "Content-Type":
@@ -70,7 +74,6 @@ def searchCourseByCode(courseCode):
             break
 
     courseList = json.loads(response.text)
-    courseList = json.loads(courseList['d'])
 
     if courseList["total"] == 0:
         return "false"
@@ -148,7 +151,6 @@ def getGeneralCourseList():
             break
 
     courseList = json.loads(response.text)
-    courseList = json.loads(courseList['d'])
 
     return courseListToDict(courseList['items'])
 
@@ -160,7 +162,6 @@ def getAppGeneralCourseList():
         headers=header
     )
     courseList = json.loads(response.text)
-    courseList = json.loads(courseList['d'])
 
     return appCourseListToDict(courseList["items"])
 
