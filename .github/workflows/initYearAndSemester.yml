@@ -44,10 +44,7 @@ jobs:
                   script: |
                       const fs = require('fs');
                       const filePath = '${{ github.workspace }}/.env';
-                      let fileContent = "
-                      YEAR=${{ env.year }}
-                      SEMESTER=${{ env.semester }}
-                      "
+                      let fileContent = `YEAR=${{ env.year }}\nSEMESTER=${{ env.semester }}`
                       fs.writeFileSync(filePath, fileContent);
 
             - name: Print updated file contents
