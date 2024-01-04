@@ -666,10 +666,6 @@ video {
   margin-top: -5rem;
 }
 
-.-mt-40 {
-  margin-top: -10rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -907,6 +903,10 @@ video {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
 .rounded-full {
