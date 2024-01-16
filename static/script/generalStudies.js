@@ -53,7 +53,7 @@ function getGeneralStudies(courseData) {
                     </div>
                 </div>
                 <div class="flex justify-center">
-                    <a href="${courseData[i].courseIntroduceUrl}" target="_blank" class="p-3 m-2 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-backgroundGreen">課程大綱</a>
+                    <a href="${courseData[i].courseIntroduceUrl}" target="_blank" title="${courseData[i].courseName}課程大綱" class="p-3 m-2 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-backgroundGreen">課程大綱</a>
                 </div>
             </div>
         `;
