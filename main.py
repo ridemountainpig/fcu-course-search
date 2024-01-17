@@ -63,5 +63,10 @@ def sitemap():
     return app.send_static_file('assets/sitemap.xml')
 
 
+@app.route('/manifest.json')
+def manifest():
+    return app.send_static_file('assets/manifest.json')
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=81))

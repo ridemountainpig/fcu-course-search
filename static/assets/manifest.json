@@ -1,0 +1,40 @@
+{
+    "short_name": "FCU Course Search",
+    "name": "FCU Course Search",
+    "icons": [
+        {
+            "src": "static/images/FF-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#FFFFF7",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#252E39",
+    "shortcuts": [
+        {
+            "name": "FCU Course Search",
+            "short_name": "FCU Course Search",
+            "description": "FCU Course Search",
+            "url": "/",
+            "icons": [{ "src": "static/images/FF-512.png", "sizes": "512x512" }]
+        }
+    ],
+    "description": "逢甲大學選課小工具-Course selection application for FCU students.",
+    "screenshots": [
+        {
+            "src": "static/images/screenshot2.png",
+            "type": "image/png",
+            "sizes": "610x1084",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "static/images/screenshot1.png",
+            "type": "image/jpg",
+            "sizes": "3014x1482",
+            "form_factor": "wide"
+        }
+    ]
+}
