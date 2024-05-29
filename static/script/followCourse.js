@@ -5,19 +5,15 @@ $(document).on("keypress", function (e) {
 });
 
 function showLoading() {
-    $("#coffeeBlock").removeClass("hidden");
-    $("#coffeeIcon").addClass("w-full h-full");
-    $("#coffeeBackground").addClass("w-full h-full");
-    $("#coffeeIcon").removeClass("hidden");
-    $("#coffeeBackground").removeClass("hidden");
+    $("#loadingBlock").removeClass("hidden");
+    $("#loadingBackground").removeClass("hidden");
+    $("#loadingIcon").removeClass("hidden");
 }
 
 function hideLoading() {
-    $("#coffeeBlock").addClass("hidden");
-    $("#coffeeIcon").removeClass("w-full h-full");
-    $("#coffeeBackground").removeClass("w-full h-full");
-    $("#coffeeIcon").addClass("hidden");
-    $("#coffeeBackground").addClass("hidden");
+    $("#loadingBlock").addClass("hidden");
+    $("#loadingBackground").addClass("hidden");
+    $("#loadingIcon").addClass("hidden");
 }
 
 function showErrorMessage(message) {
@@ -32,17 +28,27 @@ function showErrorMessage(message) {
 
 // init local storage followList when year or semester change
 async function initFollowCourse() {
-    const yearSemester = await fetch("/initYearAndSemester")
-        .then(response => {
+    const yearSemester = await fetch("/initYearAndSemester").then(
+        (response) => {
             return response.json();
-        })
+        },
+    );
 
     if (localStorage.getItem("year-semester") == null) {
-        localStorage.setItem("year-semester", yearSemester["year"] + "-" + yearSemester["semester"]);
+        localStorage.setItem(
+            "year-semester",
+            yearSemester["year"] + "-" + yearSemester["semester"],
+        );
         localStorage.setItem("followList", []);
     } else {
-        if (localStorage.getItem("year-semester") != yearSemester["year"] + "-" + yearSemester["semester"]) {
-            localStorage.setItem("year-semester", yearSemester["year"] + "-" + yearSemester["semester"]);
+        if (
+            localStorage.getItem("year-semester") !=
+            yearSemester["year"] + "-" + yearSemester["semester"]
+        ) {
+            localStorage.setItem(
+                "year-semester",
+                yearSemester["year"] + "-" + yearSemester["semester"],
+            );
             localStorage.setItem("followList", []);
         }
     }
@@ -111,7 +117,6 @@ function generateCourseList() {
         followList = [];
     }
     if (followList.length != 0) {
-        $("#courseList").empty();
         $("#followNumber").empty();
         followList = followList.split(",");
         if (followList.includes("")) {
@@ -131,6 +136,7 @@ function generateCourseList() {
             data: JSON.stringify(data),
 
             success: function (courseData) {
+                $("#courseList").empty();
                 for (let i = Object.keys(courseData).length - 1; i >= 0; i--) {
                     if (courseData[i] == "false") {
                         deleteFollowCourse(followList[i]);

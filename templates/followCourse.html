@@ -15,8 +15,16 @@
 
             gtag("config", "G-22QRKM1PH4");
         </script>
-        <script defer src="https://us.umami.is/script.js" data-website-id="c92fa8e6-2d81-4b3d-9d17-5720fcf58d32"></script>
-        <script async src="https://umami-ridemountainpig.zeabur.app/script.js" data-website-id="c1e4232f-9a4d-4409-b0a0-9bcebda99c70"></script>
+        <script
+            defer
+            src="https://us.umami.is/script.js"
+            data-website-id="c92fa8e6-2d81-4b3d-9d17-5720fcf58d32"
+        ></script>
+        <script
+            async
+            src="https://umami-ridemountainpig.zeabur.app/script.js"
+            data-website-id="c1e4232f-9a4d-4409-b0a0-9bcebda99c70"
+        ></script>
 
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,7 +36,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <title>FCU Course Search 逢甲大學課程檢索</title>
         <link rel="icon" href="/static/images/FF.png" type="image/icon" />
-        <link rel="manifest" href="manifest.json">
+        <link rel="manifest" href="manifest.json" />
         <link rel="stylesheet" href="../static/style/output.css" />
         <link rel="stylesheet" href="../static/style/style.css" />
 
@@ -38,8 +46,14 @@
             property="og:url"
             content="https://fcu-course-search.zeabur.app/followcourse"
         />
-        <meta property="og:title" content="FCU Course Search 逢甲大學課程檢索" />
-        <meta property="og:description" content="逢甲大學選課小工具-Course selection application for FCU students." />
+        <meta
+            property="og:title"
+            content="FCU Course Search 逢甲大學課程檢索"
+        />
+        <meta
+            property="og:description"
+            content="逢甲大學選課小工具-Course selection application for FCU students."
+        />
         <meta
             property="og:image"
             content="https://fcu-course-search.zeabur.app/static/images/FF.png"
@@ -51,8 +65,14 @@
             property="twitter:url"
             content="https://fcu-course-search.zeabur.app/followcourse"
         />
-        <meta property="twitter:title" content="FCU Course Search 逢甲大學課程檢索" />
-        <meta property="twitter:description" content="逢甲大學選課小工具-Course selection application for FCU students." />
+        <meta
+            property="twitter:title"
+            content="FCU Course Search 逢甲大學課程檢索"
+        />
+        <meta
+            property="twitter:description"
+            content="逢甲大學選課小工具-Course selection application for FCU students."
+        />
         <meta
             property="twitter:image"
             content="https://fcu-course-search.zeabur.app/static/images/FF.png"
@@ -77,7 +97,10 @@
             class="flex items-center max-[1200px]:justify-center min-[1201px]:ml-24 max-[465px]:ml-4 h-44"
         >
             <div class="w-96">
-                <a href="https://fcu-course-search.zeabur.app/" title="FCU Course Search">
+                <a
+                    href="https://fcu-course-search.zeabur.app/"
+                    title="FCU Course Search"
+                >
                     <div class="cursor-pointer min-[1201px]:hidden">
                         <i
                             class="bi bi-arrow-left-square text-gray-400 font-bold"
@@ -86,7 +109,10 @@
                     </div>
                 </a>
                 <div class="flex font-bold text-4xl text-gray-600 mt-2">
-                    <a href="https://fcu-course-search.zeabur.app/" title="FCU Course Search">
+                    <a
+                        href="https://fcu-course-search.zeabur.app/"
+                        title="FCU Course Search"
+                    >
                         <div class="cursor-pointer max-[1200px]:hidden">
                             <i
                                 class="bi bi-arrow-left-square text-gray-400 font-bold pr-2"
@@ -110,27 +136,35 @@
                     class="relative ml-4 min-[1201px]:ml-24 mr-4 p-5 rounded-xl h-90% w-96 min-[1201px]:w-11/12 my-5 min-[1201px]:mt-0 bg-backgroundGreen"
                 >
                     <div
-                        id="coffeeBlock"
-                        class="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20"
+                        id="loadingBlock"
+                        class="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full"
                     >
                         <div
-                            id="coffeeIcon"
-                            class="z-30 flex justify-center items-center rounded-full animate-bounce bg-backgroundBrown"
+                            id="loadingIcon"
+                            class="z-30 flex justify-center items-center w-full h-full"
                         >
-                            <i
-                                class="bi bi-cup-hot text-white"
-                                style="font-size: 50px"
-                            ></i>
+                            <img
+                                class="animate-bounce"
+                                src="/static/images/FF-load.svg"
+                                width="150"
+                                alt=""
+                            />
                         </div>
                     </div>
                     <div
-                        id="coffeeBackground"
-                        class="absolute top-0 left-0 z-10 rounded-xl bg-black opacity-30"
+                        id="loadingBackground"
+                        class="absolute top-0 left-0 z-10 rounded-xl bg-black opacity-30 w-full h-full"
                     ></div>
                     <div
                         id="courseList"
                         class="courseList rounded-xl z-0 w-full h-full"
-                    ></div>
+                    >
+                        <div
+                            class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600"
+                        >
+                            載入中...
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="max-[1200px]:order-first order-none">
