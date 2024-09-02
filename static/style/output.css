@@ -754,6 +754,10 @@ video {
   height: 24rem;
 }
 
+.h-\[37px\] {
+  height: 37px;
+}
+
 .h-\[45rem\] {
   height: 45rem;
 }
@@ -1075,6 +1079,11 @@ video {
   padding-right: 0.5rem;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1121,6 +1130,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .text-2xl {
@@ -1188,8 +1201,21 @@ video {
   font-weight: 500;
 }
 
+.font-semibold {
+  font-weight: 600;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
 .tracking-wider {
   letter-spacing: 0.05em;
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-gray-400 {
@@ -1205,11 +1231,6 @@ video {
 .text-gray-600 {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
-.text-green-500 {
-  --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
 .text-orange-400 {
@@ -1440,6 +1461,12 @@ video {
   }
 }
 
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+}
+
 @media (min-width: 930px) {
   .min-\[930px\]\:flex {
     display: flex;
@@ -1499,12 +1526,6 @@ video {
   .lg\:hover\:bg-lime-50:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(247 254 231 / var(--tw-bg-opacity));
-  }
-}
-
-@media (min-width: 1100px) {
-  .min-\[1100px\]\:flex {
-    display: flex;
   }
 }
 
