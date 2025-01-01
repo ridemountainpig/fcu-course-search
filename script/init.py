@@ -16,7 +16,7 @@ def getSystemYear():
         
 
         try:
-            response = s.post(url, data=data, headers=header)
+            response = s.post(url, data=data, headers=header, verify=False)
             response.raise_for_status()
 
             initData = response.text

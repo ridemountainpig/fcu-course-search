@@ -68,7 +68,8 @@ def searchCourseByCode(courseCode):
         response = s.post(
             f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
             data=data,
-            headers=header
+            headers=header,
+            verify=False
         )
         if response.status_code == 200:
             break
@@ -145,7 +146,8 @@ def getGeneralCourseList():
         response = s.post(
             f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
             data=generalStudiesData,
-            headers=header
+            headers=header,
+            verify=False
         )
         if response.status_code == 200:
             break
@@ -159,7 +161,8 @@ def getAppGeneralCourseList():
     response = s.post(
         "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
         data=generalStudiesData,
-        headers=header
+        headers=header,
+        verify=False
     )
     courseList = json.loads(response.text)
 
