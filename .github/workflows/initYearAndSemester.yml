@@ -24,9 +24,13 @@ jobs:
                   semester=$(echo "$response" | jq -r '.semester')
                   year=$(echo "$response" | jq -r '.year')
                   url=$(echo "$response" | jq -r '.url')
-                  if [ -z "$semester" ] && [ -z "$year" ]; then
-                    echo "Error: Missing semester and year. Exiting workflow."
-                    exit 1
+                  if [ -z "$semester" ] || [ "$semester" = "null" ]; then
+                      echo "Error: Missing semester. Exiting workflow."
+                      exit 1
+                  fi
+                  if [ -z "$year" ] || [ "$year" = "null" ]; then
+                      echo "Error: Missing year. Exiting workflow."
+                      exit 1
                   fi
                   echo "semester=$semester" >> $GITHUB_ENV
                   echo "year=$year" >> $GITHUB_ENV
