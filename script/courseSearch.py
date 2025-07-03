@@ -18,6 +18,38 @@ header = {
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
 }
 
+courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
+
+
+def make_robust_request(data, timeout=10):
+    response = None
+    last_error = None
+
+    for i in range(3, 5):
+        try:
+            response = s.post(
+                f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
+                data=data,
+                headers=header,
+                timeout=timeout
+            )
+            if response.status_code == 200 and response.text:
+                try:
+                    data = json.loads(response.text)
+                    return True, data, None
+                except json.JSONDecodeError as e:
+                    last_error = f"Response format error, cannot parse JSON: {e}"
+                    continue
+        except (requests.exceptions.RequestException, requests.exceptions.Timeout,
+                requests.exceptions.ConnectionError) as e:
+            last_error = f"Try server {i} failed: {e}"
+            print(last_error)
+            continue
+
+    error_msg = last_error or "All servers failed to respond"
+    print(error_msg)
+    return False, None, error_msg
+
 
 def searchCourseByCode(courseCode):
     data = '''
@@ -64,18 +96,11 @@ def searchCourseByCode(courseCode):
         }
     '''
 
-    for i in range(1, 5):
-        response = s.post(
-            f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-            data=data,
-            headers=header,
-            verify=False
-        )
-        if response.status_code == 200:
-            break
+    success, response, error = make_robust_request(data)
+    if not success:
+        return "false"
 
-    courseList = json.loads(response.text)
-
+    courseList = response
     if courseList["total"] == 0:
         return "false"
     else:
@@ -142,37 +167,26 @@ generalStudiesData = '''
 
 
 def getGeneralCourseList():
-    for i in range(1, 5):
-        response = s.post(
-            f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-            data=generalStudiesData,
-            headers=header,
-            verify=False
-        )
-        if response.status_code == 200:
-            break
+    success, response, error = make_robust_request(generalStudiesData)
+    if not success:
+        return {}
 
-    courseList = json.loads(response.text)
-
+    courseList = response
     return courseListToDict(courseList['items'])
 
 
 def getAppGeneralCourseList():
-    response = s.post(
-        "https://coursesearch02.fcu.edu.tw/Service/Search.asmx/GetType2Result",
-        data=generalStudiesData,
-        headers=header,
-        verify=False
-    )
-    courseList = json.loads(response.text)
+    success, response, error = make_robust_request(generalStudiesData)
+    if not success:
+        return []
 
+    courseList = response
     return appCourseListToDict(courseList["items"])
 
 
 def byCodeCourseListToDict(courseList):
     result = {}
     count = 0
-    courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
 
     for i in range(len(courseList)):
         courseNumber = courseList[i]["scr_selcode"]
@@ -208,7 +222,6 @@ def byCodeCourseListToDict(courseList):
 def courseListToDict(courseList):
     result = {}
     count = 0
-    courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
     for i in range(len(courseList)):
         courseNumber = courseList[i]["scr_selcode"]
         courseName = courseList[i]["sub_name"]
@@ -242,7 +255,6 @@ def courseListToDict(courseList):
 def appCourseListToDict(courseList):
     result = []
     count = 0
-    courseUrlTitle = "https://coursesearch02.fcu.edu.tw/CourseOutline.aspx?lang=cht&courseid="
     for i in range(len(courseList)):
         courseNumber = courseList[i]["scr_selcode"]
         courseName = courseList[i]["sub_name"]

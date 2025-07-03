@@ -13,10 +13,9 @@ def getSystemYear():
 
     for i in range(1, 5):
         url = f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/init"
-        
 
         try:
-            response = s.post(url, data=data, headers=header, verify=False)
+            response = s.post(url, data=data, headers=header, timeout=10)
             response.raise_for_status()
 
             initData = response.text
