@@ -2,6 +2,10 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+import urllib3
+
+# Disable SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv()
 
@@ -31,7 +35,8 @@ def make_robust_request(data, timeout=10):
                 f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/GetType2Result",
                 data=data,
                 headers=header,
-                timeout=timeout
+                timeout=timeout,
+                verify=False
             )
             if response.status_code == 200 and response.text:
                 try:

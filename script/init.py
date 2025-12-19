@@ -1,5 +1,9 @@
 import requests
 import json
+import urllib3
+
+# Disable SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 s = requests.Session()
 
@@ -15,7 +19,7 @@ def getSystemYear():
         url = f"https://coursesearch0{i}.fcu.edu.tw/Service/Search.asmx/init"
 
         try:
-            response = s.post(url, data=data, headers=header, timeout=10)
+            response = s.post(url, data=data, headers=header, timeout=10, verify=False)
             response.raise_for_status()
 
             initData = response.text
