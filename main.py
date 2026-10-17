@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 from script import courseSearch as cs
 from script import init
 import os
@@ -6,6 +6,14 @@ import os
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['DEBUG'] = True
+
+REDIRECT_URL = os.getenv("REDIRECT_URL", "").rstrip('/')
+
+
+@app.before_request
+def redirectToNewDomain():
+    if REDIRECT_URL:
+        return redirect(REDIRECT_URL + request.full_path.rstrip('?'), code=301)
 
 
 @app.route('/')
