@@ -1,246 +1,48 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"
-        ></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
+{% extends "base.html" %}
 
-            gtag("config", "G-22QRKM1PH4");
-        </script>
+{% block title %}FCU Course Search | Follow Course 關注課程{% endblock %}
+{% block description %}FCU Course Search 逢甲大學課程檢索, Follow Course 關注課程, 逢甲大學選課小工具-Course selection application for FCU students.{% endblock %}
 
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
-        />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <title>FCU Course Search | Follow Course 關注課程</title>
-        <meta
-            name="description"
-            content="FCU Course Search 逢甲大學課程檢索, Follow Course 關注課程, 逢甲大學選課小工具-Course selection application for FCU students."
-        />
-        <meta
-            name="keywords"
-            content="FCU, Course Search, FCU Course Search, 逢甲大學, 課程查詢, 課程追蹤, 課程檢索, 通識課程, 逢甲大學課程檢索, 逢甲大學課程檢索系統"
-        />
-        <link rel="icon" href="/static/images/FF.png" type="image/icon" />
-        <link rel="manifest" href="manifest.json" />
-        <link rel="stylesheet" href="../static/style/output.css" />
-        <link rel="stylesheet" href="../static/style/style.css" />
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website" />
-        <meta
-            property="og:url"
-            content="https://fcu-course-search.yencheng.dev/followcourse"
-        />
-        <meta
-            property="og:title"
-            content="FCU Course Search 逢甲大學課程檢索"
-        />
-        <meta
-            property="og:description"
-            content="逢甲大學選課小工具-Course selection application for FCU students."
-        />
-        <meta
-            property="og:image"
-            content="https://fcu-course-search.yencheng.dev/static/images/FF.png"
-        />
-
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-            property="twitter:url"
-            content="https://fcu-course-search.yencheng.dev/followcourse"
-        />
-        <meta
-            property="twitter:title"
-            content="FCU Course Search 逢甲大學課程檢索"
-        />
-        <meta
-            property="twitter:description"
-            content="逢甲大學選課小工具-Course selection application for FCU students."
-        />
-        <meta
-            property="twitter:image"
-            content="https://fcu-course-search.yencheng.dev/static/images/FF.png"
-        />
-
-        <style>
-            .courseList {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-                overflow-y: scroll;
-            }
-
-            .courseList::-webkit-scrollbar {
-                display: none;
-            }
-        </style>
-    </head>
-
-    <body class="h-screen bg-slate-100">
-        <div id="courseNumError"></div>
-        <div
-            class="flex items-center max-[1200px]:justify-center min-[1201px]:ml-24 max-[465px]:ml-4 h-44"
-        >
-            <div class="w-96">
-                <a
-                    href="https://fcu-course-search.yencheng.dev/"
-                    title="FCU Course Search"
-                >
-                    <div class="cursor-pointer min-[1201px]:hidden">
-                        <i
-                            class="bi bi-arrow-left-square text-gray-400 font-bold"
-                            style="font-size: 30px"
-                        ></i>
-                    </div>
-                </a>
-                <div class="flex font-bold text-4xl text-gray-600 mt-2">
-                    <a
-                        href="https://fcu-course-search.yencheng.dev/"
-                        title="FCU Course Search"
-                    >
-                        <div class="cursor-pointer max-[1200px]:hidden">
-                            <i
-                                class="bi bi-arrow-left-square text-gray-400 font-bold pr-2"
-                                style="font-size: 30px"
-                            ></i>
-                        </div>
-                    </a>
-                    Follow Course
-                </div>
-                <div
-                    class="font-medium text-lg text-gray-400 mt-6 px-1 border-b-4 border-gray-400"
-                    style="width: 122px; letter-spacing: 10px"
-                >
-                    關注課程
-                </div>
+{% block content %}
+<div class="ph">
+    <h1>關注課程</h1>
+    <div class="seg" role="tablist" aria-label="檢視方式">
+        <button type="button" role="tab" id="viewList" aria-selected="true">列表</button>
+        <button type="button" role="tab" id="viewGrid" aria-selected="false">課表</button>
+    </div>
+</div>
+<div class="follow">
+    <div class="follow-main">
+        <div class="list" id="courseList"></div>
+        <div id="courseGrid" hidden>
+            <div class="panel grid-wrap"><div class="tt" id="timetable"></div></div>
+            <div class="unscheduled" id="unscheduled" hidden></div>
+            <div class="legend">
+                <span><i class="legend-ok"></i>有名額</span>
+                <span><i class="legend-full"></i>已額滿</span>
+                <span id="clashLegend" hidden><i class="legend-clash"></i>衝堂</span>
             </div>
         </div>
-        <div class="flex max-[1200px]:flex-col" style="height: 74%">
-            <div class="flex min-[1200px]:flex-auto justify-center h-full">
-                <div
-                    class="relative ml-4 min-[1201px]:ml-24 mr-4 p-5 rounded-xl h-90% w-96 min-[1201px]:w-11/12 my-5 min-[1201px]:mt-0 bg-backgroundGreen"
-                >
-                    <div
-                        id="loadingBlock"
-                        class="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full"
-                    >
-                        <div
-                            id="loadingIcon"
-                            class="z-30 flex justify-center items-center w-full h-full"
-                        >
-                            <img
-                                class="animate-bounce"
-                                src="/static/images/FF-load.svg"
-                                width="150"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div
-                        id="loadingBackground"
-                        class="absolute top-0 left-0 z-10 rounded-xl bg-black opacity-30 w-full h-full"
-                    ></div>
-                    <div
-                        id="courseList"
-                        class="courseList rounded-xl z-0 w-full h-full"
-                    >
-                        <div
-                            class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600"
-                        >
-                            載入中...
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="max-[1200px]:order-first order-none">
-                <div class="flex justify-center">
-                    <div class="ml-4 rounded-xl bg-slate-200 w-44 h-44">
-                        <div class="flex items-center h-full">
-                            <div>
-                                <div
-                                    class="text-3xl text-gray-500 px-4 text-center"
-                                    style="font-weight: bolder"
-                                >
-                                    Follow Number
-                                </div>
-                                <div
-                                    class="font-black text-sm text-gray-400 mt-4 text-center"
-                                >
-                                    關注數量
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="ml-8 min-[1201px]:mr-24 mr-4 rounded-xl bg-slate-200 w-44 h-44"
-                    >
-                        <div
-                            id="followNumber"
-                            class="flex justify-center items-center h-full font-black text-6xl text-gray-500 p-4"
-                        ></div>
-                    </div>
-                </div>
-                <div class="flex justify-center">
-                    <div
-                        class="h-56 bg-white ml-4 min-[1201px]:mr-24 mr-4 mt-5 p-5 rounded-xl w-96"
-                    >
-                        <div class="h-3/5">
-                            <div
-                                class="flex justify-between w-full overflow-hidden"
-                            >
-                                <div
-                                    class="font-medium text-sm text-gray-400 py-2"
-                                >
-                                    請輸入課程號碼
-                                </div>
-                            </div>
-                            <div
-                                class="relative flex justify-center items-center"
-                            >
-                                <div
-                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-                                >
-                                    <i
-                                        class="bi bi-plus-circle text-gray-400"
-                                        style="font-size: 20px"
-                                    ></i>
-                                </div>
-                                <input
-                                    type="number"
-                                    id="courseInput"
-                                    class="block w-full p-4 pl-10 text-base text-gray-400 font-bold rounded-lg bg-slate-100 focus:outline-none"
-                                    placeholder="Course Number"
-                                />
-                            </div>
-                        </div>
-                        <div class="flex justify-center">
-                            <button
-                                class="text-gray-600 bg-sky-200 font-medium rounded-lg text-base p-3"
-                                onclick="addFollowCourse()"
-                            >
-                                關注課程
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="/static/script/followCourse.js"></script>
-        <script>
-            initFollowCourse();
-        </script>
-    </body>
-</html>
+    </div>
+    <aside class="panel">
+        <div class="big"><span class="num" id="followCount">0</span><span>門關注中</span></div>
+        <span class="status ok" id="openCount" hidden></span>
+        <form class="follow-form" id="followForm">
+            <label class="code sm" id="followCode">
+                <input
+                    id="courseInput"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    maxlength="4"
+                    aria-label="新增關注的選課代號"
+                />
+            </label>
+            <button class="btn pen wide" type="submit" id="followButton">加入關注</button>
+        </form>
+    </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/script/followCourse.js"></script>
+{% endblock %}

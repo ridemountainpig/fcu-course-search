@@ -191,8 +191,9 @@ generalStudiesData = '''
 
 def getGeneralCourseList():
     success, response, error = make_robust_request(generalStudiesData)
+    # None (not {}) so the page can tell a failed request from "every course is full"
     if not success:
-        return {}
+        return None
 
     courseList = response
     return courseListToDict(courseList['items'])

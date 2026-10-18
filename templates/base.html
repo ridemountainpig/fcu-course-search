@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-22QRKM1PH4"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-22QRKM1PH4");
+        </script>
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <title>{% block title %}FCU Course Search 逢甲大學課程檢索{% endblock %}</title>
+        <meta
+            name="description"
+            content="{% block description %}FCU Course Search 逢甲大學課程檢索, 逢甲大學選課小工具-Course selection application for FCU students.{% endblock %}"
+        />
+        <meta
+            name="keywords"
+            content="FCU, Course Search, FCU Course Search, 逢甲大學, 課程查詢, 課程追蹤, 課程檢索, 通識課程, 逢甲大學課程檢索, 逢甲大學課程檢索系統"
+        />
+        <meta
+            name="theme-color"
+            content="#f1f5f9"
+            media="(prefers-color-scheme: light)"
+        />
+        <meta
+            name="theme-color"
+            content="#0f141a"
+            media="(prefers-color-scheme: dark)"
+        />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/static/images/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/static/images/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap"
+        />
+        <link rel="stylesheet" href="/static/style/output.css" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://fcu-course-search.yencheng.dev{{ request.path }}" />
+        <meta property="og:title" content="{{ self.title() }}" />
+        <meta
+            property="og:description"
+            content="逢甲大學選課小工具-Course selection application for FCU students."
+        />
+        <meta
+            property="og:image"
+            content="https://fcu-course-search.yencheng.dev/static/images/icon-512.png"
+        />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:url" content="https://fcu-course-search.yencheng.dev{{ request.path }}" />
+        <meta property="twitter:title" content="{{ self.title() }}" />
+        <meta
+            property="twitter:description"
+            content="逢甲大學選課小工具-Course selection application for FCU students."
+        />
+        <meta
+            property="twitter:image"
+            content="https://fcu-course-search.yencheng.dev/static/images/icon-512.png"
+        />
+    </head>
+
+    <body class="site{% if page == 'home' %} is-home{% endif %}">
+        {% if page != 'home' %}
+        <header class="bar">
+            <a class="brand" href="/" title="FCU Course Search">
+                {% include "partials/logo-mini.html" %}
+                <span>Course Search</span>
+                <span class="term num">{{ term }}</span>
+            </a>
+            <nav class="links" aria-label="頁面">
+                <a href="/searchcourse" {% if page == 'search' %}class="on" aria-current="page"{% endif %}>
+                    {% include "partials/icon-search.html" %}<span>課程查詢</span>
+                </a>
+                <a href="/generalstudies" {% if page == 'general' %}class="on" aria-current="page"{% endif %}>
+                    {% include "partials/icon-grid.html" %}<span>通識課程</span>
+                </a>
+                <a href="/followcourse" {% if page == 'follow' %}class="on" aria-current="page"{% endif %}>
+                    {% include "partials/icon-bookmark.html" %}<span>關注課程</span>
+                </a>
+            </nav>
+        </header>
+        {% endif %}
+
+        <main class="main{% if page == 'home' %} main-home{% endif %}{% if page == 'search' %} main-search{% endif %}">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="foot">
+            <div class="foot-l">
+                <a class="brand" href="/" title="FCU Course Search">
+                    {% include "partials/logo-mini.html" %}
+                    <span>Course Search</span>
+                </a>
+                <span class="copy">© {{ year }}</span>
+            </div>
+            <div class="foot-r">
+                <span class="foot-by">Built by <a href="https://yencheng.dev">YenCheng</a></span>
+                <i class="foot-sep" aria-hidden="true"></i>
+                <a
+                    class="foot-ic"
+                    href="https://github.com/ridemountainpig/fcu-course-search"
+                    aria-label="GitHub"
+                >
+                    {% include "partials/icon-github.html" %}
+                </a>
+            </div>
+        </footer>
+
+        <div class="toasts" id="toasts" aria-live="polite"></div>
+        <script src="/static/script/common.js"></script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

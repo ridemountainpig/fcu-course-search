@@ -1,4 +1,4 @@
-flask
-requests
-python-dotenv
-urllib3
+flask>=3.1,<4
+requests>=2.34,<3
+python-dotenv>=1.2,<2
+urllib3>=2.8,<3
