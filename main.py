@@ -2,30 +2,36 @@ from flask import Flask, render_template, jsonify, request
 from script import courseSearch as cs
 from script import init
 import os
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['DEBUG'] = True
 
 
+@app.context_processor
+def injectSiteInfo():
+    return {"term": f"{cs.year}-{cs.semester}", "year": datetime.now().year}
+
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', page='home')
 
 
 @app.route('/searchcourse')
 def searchCourse():
-    return render_template('searchCourse.html')
+    return render_template('searchCourse.html', page='search')
 
 
 @app.route('/followcourse')
 def followCourse():
-    return render_template('followCourse.html')
+    return render_template('followCourse.html', page='follow')
 
 
 @app.route('/generalstudies')
 def generalstudies():
-    return render_template('generalStudies.html', courseData=cs.getGeneralCourseList())
+    return render_template('generalStudies.html', page='general', courseData=cs.getGeneralCourseList())
 
 
 @app.route('/searchcourse/<course>')

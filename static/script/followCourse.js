@@ -1,204 +1,277 @@
-$(document).on("keypress", function (e) {
-    if (e.which == 13) {
-        addFollowCourse();
+const code = codeBoxes(document.getElementById("followCode"));
+const list = document.getElementById("courseList");
+const grid = document.getElementById("courseGrid");
+const timetable = document.getElementById("timetable");
+const unscheduledEl = document.getElementById("unscheduled");
+const followCount = document.getElementById("followCount");
+const openCount = document.getElementById("openCount");
+const followButton = document.getElementById("followButton");
+const clashLegend = document.getElementById("clashLegend");
+let courses = [];
+let semesterReset;
+
+// reset the follow list when the school moves to a new semester; returns true if it did
+async function syncSemester() {
+    try {
+        const res = await fetch("/initYearAndSemester");
+        const { year, semester } = await res.json();
+        if (!year || !semester) return false;
+        const current = `${year}-${semester}`;
+        const previous = localStorage.getItem("year-semester");
+        localStorage.setItem("year-semester", current);
+        if (previous !== null && previous !== current) {
+            setFollowList([]);
+            return true;
+        }
+    } catch {
+        // keep the existing list if the school system is unreachable
     }
+    return false;
+}
+
+function renderSummary() {
+    followCount.textContent = courses.length;
+    const open = courses.filter((course) => seatInfo(course).left > 0).length;
+    openCount.textContent = `${open} 門有名額`;
+    openCount.hidden = open === 0;
+}
+
+function renderList() {
+    list.innerHTML = courses.length
+        ? courses
+              .map((course) =>
+                  courseItem(course, removeButton(course, "x")),
+              )
+              .join("")
+        : `<div class="empty-state">還沒有關注的課程，輸入選課代號加入關注</div>`;
+}
+
+// one handler for every × (list rows, timetable blocks, unscheduled chips)
+document.getElementById("courseList").parentElement.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-remove]");
+    if (btn) removeCourse(btn.dataset.remove);
 });
 
-function showLoading() {
-    $("#loadingBlock").removeClass("hidden");
-    $("#loadingBackground").removeClass("hidden");
-    $("#loadingIcon").removeClass("hidden");
-}
+const removeButton = (course, cls) =>
+    `<button class="${cls}" type="button" data-remove="${esc(
+        course.courseNumber,
+    )}" aria-label="取消關注 ${esc(course.courseName)}">×</button>`;
 
-function hideLoading() {
-    $("#loadingBlock").addClass("hidden");
-    $("#loadingBackground").addClass("hidden");
-    $("#loadingIcon").addClass("hidden");
-}
-
-function showErrorMessage(message) {
-    let errorHtml = `
-        <div class="notification">
-            <p>${message}</p>
-            <span class="notification_progress"></span>
-        </div>
-    `;
-    $("#courseNumError").append(errorHtml);
-}
-
-// init local storage followList when year or semester change
-async function initFollowCourse() {
-    const yearSemester = await fetch("/initYearAndSemester").then(
-        (response) => {
-            return response.json();
-        },
+function renderTimetable() {
+    // period 0 means the school has not scheduled a time (e.g. 碩士論文)
+    const placed = courses.map((course) => ({
+        course,
+        slots: parseSchedule(course.courseDate).filter((s) => s.from >= 1),
+    }));
+    const allSlots = placed.flatMap((p) => p.slots);
+    // weekdays always, weekend only when a followed course meets then
+    const days = DAYS.filter(
+        (d, i) => i < 5 || allSlots.some((s) => s.day === d),
     );
+    const lastPeriod = Math.max(10, ...allSlots.map((s) => s.to));
 
-    if (localStorage.getItem("year-semester") == null) {
-        localStorage.setItem(
-            "year-semester",
-            yearSemester["year"] + "-" + yearSemester["semester"],
-        );
-        localStorage.setItem("followList", []);
-    } else {
-        if (
-            localStorage.getItem("year-semester") !=
-            yearSemester["year"] + "-" + yearSemester["semester"]
-        ) {
-            localStorage.setItem(
-                "year-semester",
-                yearSemester["year"] + "-" + yearSemester["semester"],
+    // clashing courses share the day column side by side, each in its own lane
+    const blocks = placed.flatMap(({ course, slots }) =>
+        slots.map((slot) => ({ course, slot, lane: 0, lanes: 1 })),
+    );
+    const lanesPerDay = days.map((d) => {
+        const dayBlocks = blocks
+            .filter((b) => b.slot.day === d)
+            .sort((a, b) => a.slot.from - b.slot.from);
+        let most = 1;
+        let group = [];
+        let groupEnd = 0;
+        const closeGroup = () => {
+            const lanes = Math.max(0, ...group.map((b) => b.lane)) + 1;
+            group.forEach((b) => (b.lanes = lanes));
+            most = Math.max(most, lanes);
+        };
+        dayBlocks.forEach((b) => {
+            if (group.length && b.slot.from > groupEnd) {
+                closeGroup();
+                group = [];
+            }
+            const busy = new Set(
+                group.filter((g) => g.slot.to >= b.slot.from).map((g) => g.lane),
             );
-            localStorage.setItem("followList", []);
-        }
-    }
+            while (busy.has(b.lane)) b.lane++;
+            group.push(b);
+            groupEnd = Math.max(groupEnd, b.slot.to);
+        });
+        if (group.length) closeGroup();
+        return most;
+    });
 
-    generateCourseList();
+    timetable.style.gridTemplateColumns = `34px ${lanesPerDay
+        .map((n) => `minmax(${84 * n}px, ${n}fr)`)
+        .join(" ")}`;
+    timetable.style.gridTemplateRows = `30px repeat(${lastPeriod}, 40px)`;
+
+    const cell = (cls, row, col, body = "", extra = "") =>
+        `<span class="${cls}" style="grid-row:${row};grid-column:${col}${extra}">${body}</span>`;
+    let html = days.map((d, i) => cell("h", 1, i + 2, d)).join("");
+    for (let p = 1; p <= lastPeriod; p++) {
+        html += cell("p", p + 1, 1, p);
+        days.forEach((_, i) => {
+            html += cell("c", p + 1, i + 2);
+        });
+    }
+    blocks.forEach(({ course, slot, lane, lanes }) => {
+        const open = seatInfo(course).left > 0;
+        // percentages on a grid item resolve against its grid area, i.e. the day column
+        const split =
+            lanes > 1
+                ? `;width:calc((100% - ${lanes - 1} * 3px) / ${lanes});margin-left:calc((100% + 3px) * ${lane} / ${lanes})`
+                : "";
+        html += cell(
+            `blk${open ? " ok" : ""}${lanes > 1 ? " clash" : ""}`,
+            `${slot.from + 1} / ${slot.to + 2}`,
+            days.indexOf(slot.day) + 2,
+            `${esc(course.courseName)}<small>${esc(
+                course.courseNumber,
+            )}</small>${removeButton(course, "blk-x")}`,
+            split,
+        );
+    });
+    timetable.innerHTML = html;
+    clashLegend.hidden = !blocks.some((b) => b.lanes > 1);
+
+    const unscheduled = placed.filter((p) => p.slots.length === 0);
+    unscheduledEl.hidden = unscheduled.length === 0;
+    unscheduledEl.innerHTML =
+        `<span class="unscheduled-label">未排時間</span>` +
+        unscheduled
+            .map(
+                ({ course }) =>
+                    `<span class="chip"><b class="num">${esc(
+                        course.courseNumber,
+                    )}</b>${esc(course.courseName)}${removeButton(
+                        course,
+                        "chip-x",
+                    )}</span>`,
+            )
+            .join("");
 }
 
-function addFollowCourse() {
-    showLoading();
-    let courseNumber = $("#courseInput").val();
-    $("#courseInput").val("");
-    if (courseNumber == "") {
-        hideLoading();
-        showErrorMessage("請輸入課程號碼");
+function render() {
+    renderSummary();
+    renderList();
+    renderTimetable();
+}
+
+async function loadCourses() {
+    const followList = getFollowList();
+    if (followList.length === 0) {
+        courses = [];
+        render();
         return;
     }
-    let followList = localStorage.getItem("followList");
-    if (followList != null) {
-        followList = followList.split(",");
-        if (followList.includes(`${courseNumber}`)) {
-            hideLoading();
-            showErrorMessage("已關注此課程");
+    list.innerHTML = followList
+        .map(() => `<div class="skeleton"></div>`)
+        .join("");
+    try {
+        const res = await fetch("/searchcourselist", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ followList }),
+        });
+        const data = await res.json();
+        // the semester check runs alongside; if it cleared the list, don't write old codes back
+        if (await semesterReset) {
+            courses = [];
+            render();
             return;
         }
+        const found = [];
+        followList.forEach((courseNumber, i) => {
+            if (data[i] && data[i] !== "false") found.push(data[i]);
+        });
+        // drop codes that no longer exist this semester
+        setFollowList(found.map((course) => String(course.courseNumber)));
+        courses = found;
+        render();
+    } catch {
+        list.innerHTML = `<div class="empty-state">連不上學校的選課系統，請稍後重新整理。</div>`;
     }
-    $.ajax({
-        url: "/checkcourse/" + courseNumber,
-        success: function (res) {
-            if (res == "true") {
-                let followList = localStorage.getItem("followList");
-                if (followList == null) {
-                    followList = [];
-                    followList.push(courseNumber);
-                } else {
-                    followList = followList.split(",");
-                    if (!followList.includes(courseNumber)) {
-                        followList.push(courseNumber);
-                    }
-                }
-                localStorage.setItem("followList", followList);
-                generateCourseList();
-            } else {
-                hideLoading();
-                showErrorMessage("課程號碼錯誤");
-            }
+}
+
+function removeCourse(courseNumber) {
+    const codes = getFollowList();
+    const codeIndex = codes.indexOf(courseNumber);
+    const index = courses.findIndex(
+        (course) => String(course.courseNumber) === courseNumber,
+    );
+    if (index === -1) return;
+    const [course] = courses.splice(index, 1);
+    setFollowList(codes.filter((c) => c !== courseNumber));
+    render();
+    toast(`已取消關注 ${course.courseName}`, {
+        label: "復原",
+        onClick() {
+            if (getFollowList().includes(courseNumber)) return;
+            const restored = getFollowList();
+            restored.splice(Math.max(codeIndex, 0), 0, courseNumber);
+            setFollowList(restored);
+            courses.splice(Math.min(index, courses.length), 0, course);
+            render();
         },
     });
 }
 
-function deleteFollowCourse(courseNumber) {
-    showLoading();
-    let followList = localStorage.getItem("followList");
-    followList = followList.split(",");
-    followList.splice(followList.indexOf(courseNumber.toString()), 1);
-    if (followList.length == 0) {
-        followList = [];
+document.getElementById("followForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const courseNumber = code.input.value;
+    if (courseNumber.length !== 4) {
+        toast("請輸入四位數選課代號");
+        code.input.focus();
+        return;
     }
-    localStorage.setItem("followList", followList);
-    generateCourseList();
-}
-
-function generateCourseList() {
-    showLoading();
-    let followList = localStorage.getItem("followList");
-    if (followList == null) {
-        followList = [];
+    if (getFollowList().includes(courseNumber)) {
+        toast("已關注此課程");
+        code.clear();
+        return;
     }
-    if (followList.length != 0) {
-        $("#followNumber").empty();
-        followList = followList.split(",");
-        if (followList.includes("")) {
-            $("#followNumber").append(followList.length - 1);
+    followButton.disabled = true;
+    followButton.textContent = "查詢中…";
+    try {
+        const course = await fetchCourse(courseNumber);
+        if (course) {
+            addToFollowList(courseNumber);
+            courses.push(course);
+            render();
+            code.clear();
+            toast(`已關注 ${course.courseName}`);
         } else {
-            $("#followNumber").append(followList.length);
+            toast("找不到這個選課代號");
         }
-
-        var data = {
-            followList: followList,
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "/searchcourselist",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-
-            success: function (courseData) {
-                $("#courseList").empty();
-                for (let i = Object.keys(courseData).length - 1; i >= 0; i--) {
-                    if (courseData[i] == "false") {
-                        deleteFollowCourse(followList[i]);
-                        break;
-                    }
-                    let courseHtml = `
-                            <div class="min-[1301px]:flex items-center justify-around p-2 my-2 bg-white rounded-xl">
-                                <div id="courseNumber" class="flex justify-center items-center p-5 m-3 text-gray-600 font-extrabold text-lg bg-slate-100 rounded-lg">
-                                    ${courseData[i].courseNumber}
-                                </div>
-                                <div class="flex justify-start max-[1301px]:justify-center max-[1301px]:text-center min-[1301px]:w-64">
-                                    <div>
-                                        <div id="courseName" class="text-gray-600 font-bold min-[1301px]:text-lg text-base">
-                                            ${courseData[i].courseName}
-                                        </div>
-                                        <div id="courseTime" class="text-gray-400 font-medium mt-1 min-[1301px]:text-sm text-xs">
-                                            ${courseData[i].courseDate}
-                                        </div>
-                                        <div id="courseTime" class="text-gray-400 font-medium mt-1 min-[1301px]:text-sm text-xs">
-                                            ${courseData[i].courseClass}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center max-[1301px]:w-full">
-                                    <div class="flex justify-center items-center text-orange-400 font-bold text-base min-[1301px]:text-xl min-[1301px]:w-26 w-fit mt-2">
-                                        <div class="flex justify-center w-1/3">
-                                            <div>${courseData[i].courseBalance}</div>
-                                        </div>
-                                        <div class="flex justify-center w-1/3">
-                                            <i class="bi bi-lightning-fill px-2"></i>
-                                        </div>
-                                        <div class="flex justify-center w-1/3">
-                                            <div>${courseData[i].courseSum}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center">
-                                    <button class="p-3 m-3 text-gray-600 font-bold text-base rounded-lg cursor-pointer bg-red-200" onclick="deleteFollowCourse(${courseData[i].courseNumber})">取消關注</button>
-                                </div>
-                            </div>
-                        `;
-                    $("#courseList").append(courseHtml);
-                }
-
-                setTimeout(function () {
-                    hideLoading();
-                }, 500);
-            },
-        });
-    } else {
-        let courseHtml = `
-            <div class="flex items-center justify-around p-10 my-2 bg-white rounded-xl font-bold text-xl min-[555px]:text-3xl text-gray-600">
-                尚未關注課程
-            </div>
-            <i class="bi bi-emoji-smile flex justify-center text-gray-600" style="margin-top: 10%; font-size: 80px;"></i>
-        `;
-        $("#followNumber").empty();
-        $("#followNumber").append(0);
-        $("#courseList").html(courseHtml);
-
-        setTimeout(function () {
-            hideLoading();
-        }, 500);
+    } catch {
+        toast("連不上學校的選課系統，請稍後再試");
+    } finally {
+        followButton.disabled = false;
+        followButton.textContent = "加入關注";
     }
+});
+
+const viewList = document.getElementById("viewList");
+const viewGrid = document.getElementById("viewGrid");
+function setView(showGrid) {
+    list.hidden = showGrid;
+    grid.hidden = !showGrid;
+    viewList.setAttribute("aria-selected", !showGrid);
+    viewGrid.setAttribute("aria-selected", showGrid);
+    try {
+        localStorage.setItem("followView", showGrid ? "grid" : "list");
+    } catch {}
 }
+viewList.addEventListener("click", () => setView(false));
+viewGrid.addEventListener("click", () => setView(true));
+setView(localStorage.getItem("followView") === "grid");
+
+semesterReset = syncSemester();
+loadCourses();
+semesterReset.then((reset) => {
+    if (reset) {
+        courses = [];
+        render();
+    }
+});

@@ -1,92 +1,147 @@
-$(document).on("keypress", function (e) {
-    if (e.which == 13) {
-        searchCourse();
+const code = codeBoxes(document.getElementById("searchCode"));
+const result = document.getElementById("result");
+const button = document.getElementById("searchButton");
+const page = document.getElementById("searchPage");
+const recent = document.getElementById("recent");
+const recentList = document.getElementById("recentList");
+
+// last few successful searches, newest first: [{ code, name }]
+function getRecent() {
+    try {
+        return JSON.parse(localStorage.getItem("recentSearches")) || [];
+    } catch {
+        return [];
     }
-});
+}
 
-function searchCourse() {
-    let courseNumber = $("#courseInput").val();
+function saveRecent(course) {
+    const code = String(course.courseNumber);
+    const list = getRecent().filter((item) => item.code !== code);
+    list.unshift({ code, name: course.courseName });
+    localStorage.setItem("recentSearches", JSON.stringify(list.slice(0, 6)));
+}
 
-    if (courseNumber == "") {
-        return;
-    }
-
-    $("#searchInput").addClass("hidden");
-    $("#courseListBox").removeClass("hidden");
-    $("#courseInput").val("");
-
-    $.ajax({
-        url: "/searchcourse/" + courseNumber,
-        success: function (res) {
-            if (res != "false") {
-                let courseData = res;
-                let courseHtml = `
-                        <div class="items-center justify-around py-6 px-10 bg-white rounded-xl shadow-2xl">
-                            <div>
-                                <div id="courseNumber" class="flex justify-center items-center p-5 m-3 -mt-14 text-gray-600 font-extrabold text-lg bg-backgroundGreen rounded-lg">
-                                ${courseData[0].courseNumber}
-                                </div>
-                                <div class="flex justify-end">
-                                    <div class="w-10 h-10 bg-orange-400 text-white rounded-full flex justify-center items-center -mr-14 -mt-16 cursor-pointer" onclick="resetSearchCourse()">
-                                        <i class="bi bi-x-lg" style=" font-size: 22px;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex justify-start ml-5 mt-5" style="width: 200px;">
-                                <div>
-                                    <div id="courseName" class="text-gray-600 font-bold text-xl">
-                                        ${courseData[0].courseName}
-                                    </div>
-                                    <div id="courseTime" class="text-gray-400 font-medium text-sm my-2">
-                                        開課系所：${courseData[0].courseClass}
-                                    </div>
-                                    <div id="courseTime" class="text-gray-400 font-medium text-sm my-2">
-                                        上課時間：${courseData[0].courseDate}
-                                    </div>
-                                    <div id="courseTime" class="text-gray-400 font-medium text-sm my-2">
-                                        教師：${courseData[0].courseTeacher}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex justify-center items-center text-orange-400 font-bold text-xl mt-2">
-                                <div>${courseData[0].courseBalance}<i class="bi bi-lightning-fill px-2"></i>${courseData[0].courseSum}</div>
-                            </div>
-                            <div class="flex justify-center">
-                                <a href="${courseData[0].courseIntroduceUrl}" target="_blank" title="${courseData[0].courseName}課程大綱" class="p-5 m-3 text-gray-600 font-bold text-lg rounded-lg cursor-pointer bg-backgroundGreen">課程大綱</a>
-                            </div>
-                        </div>
-                    `;
-                $("#courseList").append(courseHtml);
-            } else {
-                let courseHtml = `
-                        <div class="items-center justify-around py-6 px-10 -mt-20 bg-white rounded-xl shadow-2xl">
-                            <div>
-                                <div id="courseNumber" class="flex justify-center items-center p-5 m-3 -mt-14 text-gray-600 font-extrabold text-lg bg-backgroundGreen rounded-lg">
-                                ${courseNumber}
-                                </div>
-                                <div class="flex justify-end">
-                                    <div class="w-10 h-10 bg-orange-400 text-white rounded-full flex justify-center items-center -mr-14 -mt-16 cursor-pointer" onclick="resetSearchCourse()">
-                                        <i class="bi bi-x-lg" style=" font-size: 22px;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex justify-center mt-5">
-                                <div>
-                                    <div id="courseName" class="text-gray-600 font-bold text-xl">
-                                        課程號碼錯誤，查無此課程
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                $("#courseList").append(courseHtml);
-            }
-        },
+function renderRecent() {
+    const list = getRecent();
+    recent.hidden = list.length === 0;
+    recentList.innerHTML = list
+        .map(
+            (item) =>
+                `<button type="button" data-code="${esc(
+                    item.code,
+                )}"><span class="num">${esc(item.code)}</span><span>${esc(
+                    item.name,
+                )}</span></button>`,
+        )
+        .join("");
+    recentList.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            code.input.value = btn.dataset.code;
+            code.paint();
+            searchCourse(btn.dataset.code);
+        });
     });
 }
 
-function resetSearchCourse() {
-    $("#searchInput").removeClass("hidden");
-    $("#courseListBox").addClass("hidden");
-    $("#courseList").empty();
+function renderCourse(course) {
+    const seat = seatInfo(course);
+    const followed = getFollowList().includes(String(course.courseNumber));
+    const facts = [
+        ["時間", prettyDate(course.courseDate)],
+        ["教師", course.courseTeacher],
+        ["班級", course.courseClass],
+    ]
+        .filter(([, value]) => value)
+        .map(
+            ([key, value]) =>
+                `<span class="chip">${key} <b>${esc(value)}</b></span>`,
+        )
+        .join("");
+
+    result.innerHTML = `
+        <article class="ticket">
+            <div class="stub">
+                <small>選課代號</small>
+                <span class="num">${esc(course.courseNumber)}</span>
+            </div>
+            <div class="tbody">
+                <h2>${esc(course.courseName)}</h2>
+                <div class="facts">${facts}</div>
+                <div>
+                    <div class="seat-line">
+                        <span class="num">${seat.left}<small> / ${
+                            seat.sum
+                        }</small></span>
+                        <span class="status ${seat.state}">${seat.label}</span>
+                    </div>
+                    ${seatDots(seat)}
+                </div>
+                <div class="tactions">
+                    <a class="btn pen sm" href="${esc(
+                        course.courseIntroduceUrl,
+                    )}" target="_blank" rel="noopener" title="${esc(
+                        course.courseName,
+                    )}課程大綱">課程大綱 ↗</a>
+                    <button class="btn line sm" type="button" id="followButton" ${
+                        followed ? "disabled" : ""
+                    }>${followed ? "已關注" : "＋ 關注"}</button>
+                </div>
+            </div>
+        </article>`;
+
+    const followButton = document.getElementById("followButton");
+    followButton.addEventListener("click", () => {
+        addToFollowList(String(course.courseNumber));
+        followButton.textContent = "已關注";
+        followButton.disabled = true;
+        toast(`已關注 ${course.courseName}`);
+    });
+}
+
+async function searchCourse(courseNumber) {
+    page.dataset.state = "result";
+    button.disabled = true;
+    button.textContent = "查詢中…";
+    result.innerHTML = `<div class="skeleton" style="margin-top:28px;max-width:720px;height:220px"></div>`;
+    try {
+        const course = await fetchCourse(courseNumber);
+        if (course) {
+            renderCourse(course);
+            code.setStale(true);
+            // keep the keyboard closed on phones so the result stays in view
+            if (matchMedia("(pointer: fine)").matches) code.input.focus();
+            saveRecent(course);
+            renderRecent();
+            history.replaceState(null, "", "?q=" + courseNumber);
+        } else {
+            result.innerHTML = `<div class="notice">找不到選課代號 <b>${esc(
+                courseNumber,
+            )}</b> 的課程，請確認號碼後再試一次。</div>`;
+        }
+    } catch {
+        result.innerHTML = `<div class="notice">連不上學校的選課系統，請稍後再試。</div>`;
+    } finally {
+        button.disabled = false;
+        button.textContent = "查詢";
+    }
+}
+
+document.getElementById("searchForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const value = code.input.value;
+    if (value.length !== 4) {
+        toast("請輸入四位數選課代號");
+        code.input.focus();
+        return;
+    }
+    searchCourse(value);
+});
+
+renderRecent();
+
+const initial = new URLSearchParams(location.search).get("q");
+if (initial && /^\d{4}$/.test(initial)) {
+    code.input.value = initial;
+    code.paint();
+    searchCourse(initial);
 }

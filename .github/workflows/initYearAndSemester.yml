@@ -5,22 +5,22 @@ on:
         - cron: "0 */24 * * *"
     workflow_dispatch:
 
+permissions:
+    contents: write
+
 jobs:
     make-request:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
-
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
+              uses: actions/checkout@v4
               with:
-                  node-version: "16.x"
+                  ref: main
 
             - name: Make a GET request to a URL
               id: init
               run: |
-                  response=$(curl -s https://fcu-course-search.zeabur.app/initYearAndSemester)
+                  response=$(curl -sSL --fail --retry 3 --max-time 60 https://fcu-course-search.yencheng.dev/initYearAndSemester)
                   semester=$(echo "$response" | jq -r '.semester')
                   year=$(echo "$response" | jq -r '.year')
                   url=$(echo "$response" | jq -r '.url')
@@ -43,13 +43,7 @@ jobs:
                   echo "url=${{ env.url }}"
 
             - name: Set semester and year in script
-              uses: actions/github-script@v4
-              with:
-                  script: |
-                      const fs = require('fs');
-                      const filePath = '${{ github.workspace }}/.env';
-                      let fileContent = `YEAR=${{ env.year }}\nSEMESTER=${{ env.semester }}`
-                      fs.writeFileSync(filePath, fileContent);
+              run: printf 'YEAR=%s\nSEMESTER=%s' "${{ env.year }}" "${{ env.semester }}" > .env
 
             - name: Print updated file contents
               run: |
@@ -62,16 +56,10 @@ jobs:
 
             - name: Commit and push changes
               run: |
-                  if git diff-index --quiet HEAD --; then
+                  if git diff --quiet -- .env; then
                     echo "No changes detected."
                   else
-                    git add .
+                    git add .env
                     git commit -m "chore: update course year and semester"
+                    git push origin HEAD:main
                   fi
-              continue-on-error: true
-
-            - name: Push changes
-              uses: ad-m/github-push-action@master
-              with:
-                  branch: main
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
